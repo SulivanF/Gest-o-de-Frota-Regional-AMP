@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RedFleet - Gestão de Frota Técnica</title>
-    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -14,103 +13,44 @@
                 extend: {
                     colors: {
                         brand: {
-                            50: '#fef2f2',
-                            100: '#ffe1e1',
-                            500: '#ef4444',
-                            600: '#dc2626',
-                            700: '#b91c1c',
-                            800: '#991b1b',
-                            900: '#7f1d1d',
-                            950: '#450a0a',
+                            50: '#fef2f2', 100: '#ffe1e1', 500: '#ef4444', 600: '#dc2626', 700: '#b91c1c', 800: '#991b1b', 900: '#7f1d1d', 950: '#450a0a',
                         },
                         dark: {
-                            base: '#09090b',
-                            surface: '#121215',
-                            card: '#18181b',
-                            border: '#27272a',
-                            hover: '#27272a'
+                            base: '#09090b', surface: '#121215', card: '#18181b', border: '#27272a', hover: '#27272a'
                         }
                     },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
+                    fontFamily: { sans: ['Inter', 'sans-serif'], }
                 }
             }
         }
     </script>
-    
     <!-- Google Fonts Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <!-- jsPDF & AutoTable CDN for PDF Export -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
-
     <!-- Supabase JS Client CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <!-- Custom CSS Scrollbars & Styles -->
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #09090b;
-            color: #f4f4f5;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #121215;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #27272a;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #dc2626;
-        }
-
-        .glass-panel {
-            background: rgba(24, 24, 27, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(220, 38, 38, 0.15);
-        }
-
-        .glass-card {
-            background: rgba(18, 18, 21, 0.95);
-            border: 1px solid #27272a;
-            transition: all 0.25s ease;
-        }
-
-        .glass-card:hover {
-            border-color: rgba(220, 38, 38, 0.5);
-            box-shadow: 0 8px 25px -5px rgba(220, 38, 38, 0.15);
-        }
-
-        tbody tr {
-            transition: background-color 0.15s ease;
-        }
-        tbody tr:hover {
-            background-color: rgba(220, 38, 38, 0.05) !important;
-        }
-
-        .modal-fade-enter {
-            animation: fadeIn 0.2s ease-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.97); }
-            to { opacity: 1; transform: scale(1); }
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #09090b; color: #f4f4f5; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #121215; }
+        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #dc2626; }
+        .glass-panel { background: rgba(24, 24, 27, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(220, 38, 38, 0.15); }
+        .glass-card { background: rgba(18, 18, 21, 0.95); border: 1px solid #27272a; transition: all 0.25s ease; }
+        .glass-card:hover { border-color: rgba(220, 38, 38, 0.5); box-shadow: 0 8px 25px -5px rgba(220, 38, 38, 0.15); }
+        tbody tr { transition: background-color 0.15s ease; }
+        tbody tr:hover { background-color: rgba(220, 38, 38, 0.05) !important; }
+        .modal-fade-enter { animation: fadeIn 0.2s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body class="min-h-screen flex flex-col bg-dark-base text-zinc-100 antialiased selection:bg-brand-600 selection:text-white">
@@ -124,12 +64,12 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="text-xl font-black tracking-tight text-white uppercase">Red<span class="text-brand-500">Fleet</span></h1>
-                    <span class="bg-brand-950 text-brand-500 border border-brand-800/60 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Supabase Ativo</span>
+                    <span class="bg-brand-950 text-brand-500 border border-brand-800/60 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">RLS Desativado</span>
                 </div>
                 <p class="text-xs text-zinc-400">Controle Unificado & Planilha de Frota</p>
             </div>
         </div>
-
+        
         <!-- Quick Toolbar Actions -->
         <div class="flex items-center flex-wrap gap-2">
             <div class="bg-dark-card border border-dark-border p-1 rounded-xl flex items-center space-x-1">
@@ -163,7 +103,7 @@
 
     <!-- Main Container -->
     <main class="flex-1 max-w-[1700px] w-full mx-auto p-4 lg:p-6 space-y-6">
-
+        
         <!-- Metrics & Dashboard Summary Cards -->
         <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="glass-card p-4 rounded-2xl relative overflow-hidden flex flex-col justify-between">
@@ -281,7 +221,7 @@
                     <tbody id="vehicleTableBody" class="divide-y divide-dark-border text-sm"></tbody>
                 </table>
             </div>
-
+            
             <div id="emptyState" class="hidden flex-col items-center justify-center p-12 text-center space-y-3">
                 <div class="w-16 h-16 rounded-full bg-brand-950/40 border border-brand-900/60 flex items-center justify-center text-brand-500 text-2xl">
                     <i class="fa-solid fa-car-burst"></i>
@@ -298,7 +238,6 @@
 
         <!-- GALLERY GRID VIEW CONTAINER -->
         <div id="gridViewContainer" class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
-
     </main>
 
     <!-- MODAL: Cadastrar / Editar Veículo -->
@@ -316,10 +255,9 @@
                 </div>
                 <button onclick="closeModal()" class="text-zinc-400 hover:text-white p-2 rounded-lg hover:bg-zinc-800 transition"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-
+            
             <form id="vehicleForm" onsubmit="saveVehicle(event)" class="p-6 space-y-5">
                 <input type="hidden" id="vehicleId">
-
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Fotos do Veículo</label>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -417,7 +355,7 @@
                 </div>
                 <button onclick="closeDetailModal()" class="text-zinc-400 hover:text-white p-2 rounded-lg hover:bg-zinc-800 transition"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-
+            
             <div class="p-6 space-y-6">
                 <div>
                     <div class="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden bg-zinc-950 border border-dark-border">
@@ -426,12 +364,14 @@
                     </div>
                     <div id="detailThumbnails" class="flex items-center space-x-2 mt-3 overflow-x-auto pb-1"></div>
                 </div>
+
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                     <div class="bg-dark-surface border border-dark-border p-3 rounded-xl"><span class="text-zinc-400 text-[10px] block uppercase font-semibold">Estado</span><span id="detailEstado" class="font-bold text-emerald-400 mt-1 block">-</span></div>
                     <div class="bg-dark-surface border border-dark-border p-3 rounded-xl"><span class="text-zinc-400 text-[10px] block uppercase font-semibold">Quilometragem</span><span id="detailKm" class="font-bold text-white mt-1 block">-</span></div>
                     <div class="bg-dark-surface border border-dark-border p-3 rounded-xl"><span class="text-zinc-400 text-[10px] block uppercase font-semibold">Ano / Combustível</span><span id="detailAnoCombustivel" class="font-bold text-white mt-1 block">-</span></div>
                     <div class="bg-dark-surface border border-dark-border p-3 rounded-xl"><span class="text-zinc-400 text-[10px] block uppercase font-semibold">Status</span><span id="detailStatus" class="font-bold text-emerald-400 mt-1 block">-</span></div>
                 </div>
+
                 <div class="bg-dark-surface border border-dark-border p-4 rounded-xl space-y-2">
                     <h4 class="text-xs font-bold uppercase tracking-wider text-brand-500">Observações</h4>
                     <p id="detailObs" class="text-xs text-zinc-300 leading-relaxed">-</p>
@@ -445,225 +385,109 @@
         </div>
     </div>
 
-    <!-- SUPABASE CLIENT & APP LOGIC -->
+    <!-- Script Application Logic -->
     <script>
-        // --- CREDENCIAIS DO SUPABASE INSERIDAS ---
-        const SUPABASE_URL = 'https://alvkzwlzzeplbofgsdyi.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFsdmtZWw56ZXBsYm9mZ3NkeWkiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTc5MDc4MzQxMiwiZXhwIjoyMTA2MzU5NDEyf.fKbUvMZRgYl6CSeKLU2yWNtd3OAc3OagvurvlNJRJFk'; // Substituída pela chave segura repassada
+        // CONFIGURAÇÃO DO SUPABASE (Insira sua URL e Chave pública anon aqui)
+        const SUPABASE_URL = 'SUA_SUPABASE_URL_AQUI';
+        const SUPABASE_ANON_KEY = 'SUA_SUPABASE_ANON_KEY_AQUI';
+        
+        let supabaseClient = null;
+        try {
+            if (SUPABASE_URL && SUPABASE_ANON_KEY && SUPABASE_URL !== 'SUA_SUPABASE_URL_AQUI') {
+                supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            }
+        } catch (e) {
+            console.warn("Erro ao iniciar Supabase, operando com armazenamento local de fallback.", e);
+        }
 
-        // Inicializa o cliente do Supabase
-        const { createClient } = supabase;
-        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        let fleetData = [];
+        let vehicles = [];
         let currentView = 'table';
         let currentFilterState = 'todos';
-        let currentSort = 'recent';
-        let tempPhotoFiles = [];
+        let currentSortField = 'recent';
+        let tempPhotos = [];
+        let currentDetailPhotos = [];
+        let activeDetailPhotoIdx = 0;
 
         window.addEventListener('DOMContentLoaded', () => {
-            loadFleetData();
+            loadVehicles();
         });
 
-        // 1. CARREGAR DADOS DO SUPABASE
-        async function loadFleetData() {
-            try {
-                const { data, error } = await supabaseClient
-                    .from('veiculos') // Nome da tabela criada no Supabase
-                    .select('*')
-                    .order('created_at', { ascending: false });
-
-                if (error) {
-                    console.error('Erro ao buscar veículos:', error);
-                    alert('Erro ao carregar do Supabase. Verifique a conexão ou a tabela.');
-                    fleetData = [];
-                } else {
-                    fleetData = data || [];
+        async function loadVehicles() {
+            if (supabaseClient) {
+                try {
+                    const { data, error } = await supabaseClient.from('veiculos').select('*');
+                    if (!error && data) {
+                        vehicles = data.map(item => ({
+                            id: item.id,
+                            modelo: item.modelo,
+                            marca: item.marca,
+                            placa: item.placa,
+                            ano: item.ano,
+                            estado: item.estado,
+                            status: item.status,
+                            km: item.km,
+                            tecnico: item.tecnico,
+                            combustivel: item.combustivel,
+                            cor: item.cor,
+                            obs: item.obs,
+                            fotos: item.fotos || []
+                        }));
+                        renderData();
+                        return;
+                    }
+                } catch (err) {
+                    console.error("Erro ao carregar do Supabase:", err);
                 }
-            } catch (err) {
-                console.error(err);
-                fleetData = [];
+            }
+            // Fallback para localStorage
+            const local = localStorage.getItem('redfleet_vehicles');
+            if (local) {
+                vehicles = JSON.parse(local);
+            } else {
+                vehicles = [
+                    { id: 1, modelo: 'Strada Working', marca: 'Fiat', placa: 'ABC-1D23', ano: 2022, estado: 'Excelente', status: 'Ativo', km: 34200, tecnico: 'Carlos Silva', combustivel: 'Flex (Gas/Alc)', cor: 'Branco', obs: 'Revisão em dia.', fotos: [] },
+                    { id: 2, modelo: 'Saveiro Robust', marca: 'Volkswagen', placa: 'XYZ-9W88', ano: 2021, estado: 'Bom', status: 'Ativo', km: 58100, tecnico: 'Mariana Souza', combustivel: 'Flex (Gas/Alc)', cor: 'Prata', obs: 'Troca de pneus recente.', fotos: [] }
+                ];
             }
             renderData();
         }
 
-        // Alternar visualização Tabela / Grade
+        async function persistVehicles() {
+            if (supabaseClient) {
+                // Se conectado, sincroniza as alterações individualmente ou viaupsert
+            }
+            localStorage.setItem('redfleet_vehicles', JSON.stringify(vehicles));
+        }
+
         function switchView(view) {
             currentView = view;
             const tableContainer = document.getElementById('tableViewContainer');
             const gridContainer = document.getElementById('gridViewContainer');
-            const viewTableBtn = document.getElementById('viewTableBtn');
-            const viewGridBtn = document.getElementById('viewGridBtn');
+            const btnTable = document.getElementById('viewTableBtn');
+            const btnGrid = document.getElementById('viewGridBtn');
 
             if (view === 'table') {
                 tableContainer.classList.remove('hidden');
                 gridContainer.classList.add('hidden');
-                viewTableBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition bg-brand-600 text-white";
-                viewGridBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-zinc-400 hover:text-white flex items-center space-x-1.5 transition";
+                btnTable.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition bg-brand-600 text-white";
+                btnGrid.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-zinc-400 hover:text-white flex items-center space-x-1.5 transition";
             } else {
                 tableContainer.classList.add('hidden');
                 gridContainer.classList.remove('hidden');
-                viewGridBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition bg-brand-600 text-white";
-                viewTableBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-zinc-400 hover:text-white flex items-center space-x-1.5 transition";
+                btnGrid.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition bg-brand-600 text-white";
+                btnTable.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-zinc-400 hover:text-white flex items-center space-x-1.5 transition";
             }
             renderData();
         }
 
-        function getFilteredAndSortedData() {
-            const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
-            const sortVal = document.getElementById('sortBySelect').value;
-
-            return fleetData.filter(item => {
-                const matchSearch = (item.modelo && item.modelo.toLowerCase().includes(searchVal)) ||
-                                    (item.placa && item.placa.toLowerCase().includes(searchVal)) ||
-                                    (item.marca && item.marca.toLowerCase().includes(searchVal)) ||
-                                    (item.tecnico && item.tecnico.toLowerCase().includes(searchVal));
-
-                const matchState = (currentFilterState === 'todos') || (item.estado === currentFilterState);
-                return matchSearch && matchState;
-            }).sort((a, b) => {
-                if (sortVal === 'year-desc') return b.ano - a.ano;
-                if (sortVal === 'year-asc') return a.ano - b.ano;
-                if (sortVal === 'km-asc') return a.km - b.km;
-                if (sortVal === 'km-desc') return b.km - a.km;
-                if (sortVal === 'plate') return (a.placa || '').localeCompare(b.placa || '');
-                return 0;
+        function setFilter(type, val) {
+            currentFilterState = val;
+            ['todos', 'Excelente', 'Bom', 'Regular', 'Ruim'].forEach(st => {
+                const el = document.getElementById('filterState' + (st === 'todos' ? 'All' : st === 'Excelente' ? 'Exc' : st === 'Bom' ? 'Bom' : st === 'Regular' ? 'Reg' : 'Ruim'));
+                if (el) {
+                    el.className = (st === val) ? "px-2.5 py-1 rounded-lg font-semibold bg-brand-600 text-white transition" : "px-2.5 py-1 rounded-lg font-semibold text-zinc-400 hover:text-white transition";
+                }
             });
-        }
-
-        function renderData() {
-            const items = getFilteredAndSortedData();
-            updateStats();
-
-            const tbody = document.getElementById('vehicleTableBody');
-            const emptyState = document.getElementById('emptyState');
-            tbody.innerHTML = '';
-
-            if (items.length === 0) {
-                emptyState.classList.remove('hidden');
-                emptyState.classList.add('flex');
-            } else {
-                emptyState.classList.add('hidden');
-                emptyState.classList.remove('flex');
-            }
-
-            items.forEach(v => {
-                const tr = document.createElement('tr');
-                tr.className = 'border-b border-dark-border/60 hover:bg-dark-surface/50';
-                const photoUrl = (v.photos && v.photos.length > 0) ? v.photos[0] : 'https://placehold.co/100x100/18181b/dc2626?text=Sem+Foto';
-
-                tr.innerHTML = `
-                    <td class="py-3 px-4 text-center">
-                        <div class="w-11 h-11 rounded-lg overflow-hidden border border-dark-border mx-auto bg-zinc-900 cursor-pointer shadow-sm group relative" onclick="openDetailModal('${v.id}')">
-                            <img src="${photoUrl}" alt="${v.modelo}" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
-                        </div>
-                    </td>
-                    <td class="py-3 px-4">
-                        <div class="font-bold text-white text-sm cursor-pointer hover:text-brand-500 transition" onclick="openDetailModal('${v.id}')">${v.modelo}</div>
-                        <div class="text-[11px] text-zinc-400">${v.marca} • <span class="text-zinc-500">${v.cor || 'N/I'}</span></div>
-                    </td>
-                    <td class="py-3 px-4">
-                        <span class="inline-block bg-dark-card border border-brand-900/60 text-brand-400 font-mono font-bold text-xs px-2.5 py-1 rounded-md tracking-wider">${v.placa}</span>
-                    </td>
-                    <td class="py-3 px-4 text-center text-xs font-medium text-zinc-300">${v.ano}</td>
-                    <td class="py-3 px-4 text-xs">
-                        <div class="text-zinc-200 font-semibold">${v.tecnico || 'Não atribuído'}</div>
-                        <div class="text-[10px] text-zinc-500">${v.combustivel || 'Flex'}</div>
-                    </td>
-                    <td class="py-3 px-4 text-right font-mono font-bold text-xs text-white">${Number(v.km || 0).toLocaleString('pt-BR')} KM</td>
-                    <td class="py-3 px-4 text-center">${getStateBadge(v.estado)}</td>
-                    <td class="py-3 px-4 text-center">${getStatusBadge(v.status)}</td>
-                    <td class="py-3 px-4 text-center">
-                        <div class="flex items-center justify-center space-x-1.5">
-                            <button onclick="openDetailModal('${v.id}')" class="p-1.5 text-zinc-400 hover:text-sky-400 hover:bg-zinc-800 rounded-lg transition" title="Ver Detalhes"><i class="fa-solid fa-eye text-xs"></i></button>
-                            <button onclick="editVehicle('${v.id}')" class="p-1.5 text-zinc-400 hover:text-amber-400 hover:bg-zinc-800 rounded-lg transition" title="Editar"><i class="fa-solid fa-pen-to-square text-xs"></i></button>
-                            <button onclick="confirmDelete('${v.id}')" class="p-1.5 text-zinc-400 hover:text-brand-500 hover:bg-zinc-800 rounded-lg transition" title="Excluir"><i class="fa-solid fa-trash-can text-xs"></i></button>
-                        </div>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-
-            // Grid View Cards
-            const gridBody = document.getElementById('gridViewContainer');
-            gridBody.innerHTML = '';
-            items.forEach(v => {
-                const photoUrl = (v.photos && v.photos.length > 0) ? v.photos[0] : 'https://placehold.co/400x300/18181b/dc2626?text=Sem+Foto';
-                const card = document.createElement('div');
-                card.className = 'glass-card rounded-2xl overflow-hidden flex flex-col justify-between group';
-                card.innerHTML = `
-                    <div>
-                        <div class="relative h-44 w-full bg-zinc-950 overflow-hidden">
-                            <img src="${photoUrl}" alt="${v.modelo}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                            <div class="absolute top-2 right-2">${getStateBadge(v.estado)}</div>
-                            <div class="absolute bottom-2 left-2"><span class="bg-black/85 text-brand-400 border border-brand-900 font-mono font-bold text-xs px-2.5 py-0.5 rounded-md">${v.placa}</span></div>
-                        </div>
-                        <div class="p-4 space-y-2">
-                            <div>
-                                <h4 class="font-bold text-white text-base group-hover:text-brand-500 transition">${v.modelo}</h4>
-                                <p class="text-xs text-zinc-400">${v.marca} • Ano ${v.ano}</p>
-                            </div>
-                            <div class="text-xs text-zinc-300 bg-dark-surface p-2.5 rounded-xl border border-dark-border space-y-1">
-                                <div class="flex justify-between"><span class="text-zinc-500">Técnico:</span> <span class="font-medium">${v.tecnico || 'N/A'}</span></div>
-                                <div class="flex justify-between"><span class="text-zinc-500">Odômetro:</span> <span class="font-bold text-white">${Number(v.km || 0).toLocaleString('pt-BR')} KM</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4 pt-0 border-t border-dark-border/50 flex items-center justify-between mt-2">
-                        <span class="text-xs">${getStatusBadge(v.status)}</span>
-                        <button onclick="openDetailModal('${v.id}')" class="px-2.5 py-1.5 bg-dark-surface hover:bg-zinc-800 text-zinc-200 text-xs rounded-lg transition font-semibold">Detalhes</button>
-                    </div>
-                `;
-                gridBody.appendChild(card);
-            });
-
-            document.getElementById('showingCount').innerText = items.length;
-            document.getElementById('totalCountFooter').innerText = fleetData.length;
-        }
-
-        function getStateBadge(estado) {
-            switch(estado) {
-                case 'Excelente': return `<span class="bg-emerald-950 text-emerald-400 border border-emerald-800 px-2.5 py-0.5 rounded-full text-[11px] font-bold">Excelente</span>`;
-                case 'Bom': return `<span class="bg-teal-950 text-teal-400 border border-teal-800 px-2.5 py-0.5 rounded-full text-[11px] font-bold">Bom</span>`;
-                case 'Regular': return `<span class="bg-amber-950 text-amber-400 border border-amber-800 px-2.5 py-0.5 rounded-full text-[11px] font-bold">Regular</span>`;
-                default: return `<span class="bg-brand-950 text-brand-400 border border-brand-800 px-2.5 py-0.5 rounded-full text-[11px] font-bold">Ruim</span>`;
-            }
-        }
-
-        function getStatusBadge(status) {
-            switch(status) {
-                case 'Ativo': return `<span class="text-xs font-semibold text-emerald-400"><i class="fa-solid fa-check text-[10px] mr-1"></i>Ativo</span>`;
-                case 'Manutenção': return `<span class="text-xs font-semibold text-brand-500"><i class="fa-solid fa-wrench text-[10px] mr-1"></i>Oficina</span>`;
-                case 'Vistoria': return `<span class="text-xs font-semibold text-amber-400"><i class="fa-solid fa-clipboard-check text-[10px] mr-1"></i>Vistoria</span>`;
-                default: return `<span class="text-xs font-semibold text-zinc-500">Inativo</span>`;
-            }
-        }
-
-        function updateStats() {
-            const total = fleetData.length;
-            document.getElementById('statTotalCount').innerText = total;
-            const goodCount = fleetData.filter(v => v.estado === 'Excelente' || v.estado === 'Bom').length;
-            const warningCount = fleetData.filter(v => v.estado === 'Regular').length;
-            const criticalCount = fleetData.filter(v => v.estado === 'Ruim' || v.status === 'Manutenção').length;
-            const goodPct = total > 0 ? Math.round((goodCount / total) * 100) : 0;
-
-            document.getElementById('statGoodCount').innerText = goodCount;
-            document.getElementById('statGoodPct').innerText = `(${goodPct}%)`;
-            document.getElementById('statWarningCount').innerText = warningCount;
-            document.getElementById('statCriticalCount').innerText = criticalCount;
-        }
-
-        function setFilter(type, value) {
-            if (type === 'estado') {
-                currentFilterState = value;
-                ['All', 'Exc', 'Bom', 'Reg', 'Ruim'].forEach(k => {
-                    const btn = document.getElementById('filterState' + k);
-                    if (btn) btn.className = "px-2.5 py-1 rounded-lg font-semibold text-zinc-400 hover:text-white transition";
-                });
-                const keyMap = { 'todos': 'All', 'Excelente': 'Exc', 'Bom': 'Bom', 'Regular': 'Reg', 'Ruim': 'Ruim' };
-                const activeBtn = document.getElementById('filterState' + keyMap[value]);
-                if (activeBtn) activeBtn.className = "px-2.5 py-1 rounded-lg font-semibold bg-brand-600 text-white transition";
-            }
             renderData();
         }
 
@@ -673,22 +497,168 @@
             setFilter('estado', 'todos');
         }
 
-        function changeSort(col) {
+        function changeSort(field) {
             const select = document.getElementById('sortBySelect');
-            if (col === 'ano') select.value = select.value === 'year-desc' ? 'year-asc' : 'year-desc';
-            if (col === 'km') select.value = select.value === 'km-desc' ? 'km-asc' : 'km-desc';
-            if (col === 'placa') select.value = 'plate';
+            if (field === 'modelo') select.value = 'plate';
+            else if (field === 'placa') select.value = 'plate';
+            else if (field === 'ano') select.value = 'year-desc';
+            else if (field === 'km') select.value = 'km-asc';
+            else if (field === 'estado') select.value = 'recent';
             renderData();
         }
 
+        function renderData() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const sortVal = document.getElementById('sortBySelect').value;
+
+            let filtered = vehicles.filter(v => {
+                const matchesSearch = (v.modelo + ' ' + v.marca + ' ' + v.placa + ' ' + (v.tecnico || '')).toLowerCase().includes(search);
+                const matchesState = (currentFilterState === 'todos' || v.estado === currentFilterState);
+                return matchesSearch && matchesState;
+            });
+
+            // Ordenação
+            filtered.sort((a, b) => {
+                if (sortVal === 'year-desc') return b.ano - a.ano;
+                if (sortVal === 'year-asc') return a.ano - b.ano;
+                if (sortVal === 'km-asc') return a.km - b.km;
+                if (sortVal === 'km-desc') return b.km - a.km;
+                if (sortVal === 'plate') return a.placa.localeCompare(b.placa);
+                return b.id - a.id; // recent
+            });
+
+            // Métricas
+            const total = vehicles.length;
+            const goodCount = vehicles.filter(v => v.estado === 'Excelente' || v.estado === 'Bom').length;
+            const warningCount = vehicles.filter(v => v.estado === 'Regular').length;
+            const criticalCount = vehicles.filter(v => v.estado === 'Ruim').length;
+
+            document.getElementById('statTotalCount').innerText = total;
+            document.getElementById('statGoodCount').innerText = goodCount;
+            document.getElementById('statGoodPct').innerText = `(${total > 0 ? Math.round((goodCount/total)*100) : 0}%)`;
+            document.getElementById('statWarningCount').innerText = warningCount;
+            document.getElementById('statCriticalCount').innerText = criticalCount;
+            document.getElementById('showingCount').innerText = filtered.length;
+            document.getElementById('totalCountFooter').innerText = total;
+
+            const tbody = document.getElementById('vehicleTableBody');
+            const grid = document.getElementById('gridViewContainer');
+            const emptyState = document.getElementById('emptyState');
+
+            tbody.innerHTML = '';
+            grid.innerHTML = '';
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+                emptyState.classList.add('flex');
+                return;
+            } else {
+                emptyState.classList.remove('flex');
+                emptyState.classList.add('hidden');
+            }
+
+            filtered.forEach(v => {
+                const mainImg = (v.fotos && v.fotos.length > 0) ? v.fotos[0] : 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=300&q=80';
+                
+                // Badge de Estado
+                let stateBadge = '';
+                if(v.estado === 'Excelente') stateBadge = '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-950/80 text-emerald-400 border border-emerald-800/60">✨ Excelente</span>';
+                else if(v.estado === 'Bom') stateBadge = '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-blue-950/80 text-blue-400 border border-blue-800/60">✅ Bom</span>';
+                else if(v.estado === 'Regular') stateBadge = '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-950/80 text-amber-400 border border-amber-800/60">⚠️ Regular</span>';
+                else stateBadge = '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-brand-950/80 text-brand-400 border border-brand-800/60">🚨 Ruim</span>';
+
+                // Status Operacional
+                let statusBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-zinc-800 text-zinc-300">Ativo</span>';
+                if(v.status === 'Manutenção') statusBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-brand-950 text-brand-400 border border-brand-800">Oficina</span>';
+                else if(v.status === 'Vistoria') statusBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-950 text-amber-400 border border-amber-800">Vistoria</span>';
+
+                // Tabela
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-dark-border hover:bg-dark-surface/50 text-xs";
+                tr.innerHTML = `
+                    <td class="py-3 px-4 text-center">
+                        <img src="${mainImg}" class="w-10 h-10 rounded-lg object-cover mx-auto cursor-pointer border border-dark-border" onclick="openDetail(${v.id})">
+                    </td>
+                    <td class="py-3 px-4 font-semibold text-white cursor-pointer" onclick="openDetail(${v.id})">
+                        ${v.modelo} <span class="text-zinc-500 font-normal block text-[11px]">${v.marca}</span>
+                    </td>
+                    <td class="py-3 px-4 font-mono font-bold text-brand-400">${v.placa}</td>
+                    <td class="py-3 px-4 text-center text-zinc-300">${v.ano}</td>
+                    <td class="py-3 px-4 text-zinc-300">${v.tecnico || 'Não atribuído'}</td>
+                    <td class="py-3 px-4 text-right font-mono text-zinc-200">${Number(v.km).toLocaleString()} km</td>
+                    <td class="py-3 px-4 text-center">${stateBadge}</td>
+                    <td class="py-3 px-4 text-center">${statusBadge}</td>
+                    <td class="py-3 px-4 text-center">
+                        <div class="flex items-center justify-center space-x-1">
+                            <button onclick="openDetail(${v.id})" class="p-1.5 hover:bg-zinc-800 rounded text-zinc-400 hover:text-white transition" title="Ver Detalhes"><i class="fa-solid fa-eye"></i></button>
+                            <button onclick="openModal('edit', ${v.id})" class="p-1.5 hover:bg-zinc-800 rounded text-zinc-400 hover:text-brand-500 transition" title="Editar"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="deleteVehicle(${v.id})" class="p-1.5 hover:bg-zinc-800 rounded text-zinc-400 hover:text-brand-600 transition" title="Excluir"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+
+                // Grid Card
+                const card = document.createElement('div');
+                card.className = "glass-card rounded-2xl overflow-hidden flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-44 w-full bg-zinc-950 overflow-hidden cursor-pointer" onclick="openDetail(${v.id})">
+                            <img src="${mainImg}" class="w-full h-full object-cover">
+                            <div class="absolute top-2 left-2">${stateBadge}</div>
+                            <div class="absolute top-2 right-2 bg-black/75 px-2 py-0.5 rounded font-mono font-bold text-xs text-white">${v.placa}</div>
+                        </div>
+                        <div class="p-4 space-y-2">
+                            <h4 class="font-bold text-white text-sm cursor-pointer" onclick="openDetail(${v.id})">${v.marca} ${v.modelo} (${v.ano})</h4>
+                            <p class="text-xs text-zinc-400"><i class="fa-solid fa-user-gear mr-1 text-brand-500"></i> ${v.tecnico || 'Sem técnico'}</p>
+                            <div class="flex items-center justify-between text-xs pt-1 border-t border-dark-border text-zinc-300">
+                                <span><i class="fa-solid fa-road mr-1 text-zinc-500"></i> ${Number(v.km).toLocaleString()} km</span>
+                                <span>${statusBadge}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-dark-surface border-t border-dark-border flex items-center justify-between">
+                        <button onclick="openDetail(${v.id})" class="text-xs font-semibold text-zinc-300 hover:text-white transition">Detalhes</button>
+                        <div class="space-x-1">
+                            <button onclick="openModal('edit', ${v.id})" class="p-1.5 hover:bg-zinc-800 rounded text-zinc-400 hover:text-brand-500"><i class="fa-solid fa-pen text-xs"></i></button>
+                            <button onclick="deleteVehicle(${v.id})" class="p-1.5 hover:bg-zinc-800 rounded text-zinc-400 hover:text-brand-600"><i class="fa-solid fa-trash text-xs"></i></button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
         function openModal(mode, id = null) {
-            tempPhotoFiles = [];
             const modal = document.getElementById('vehicleModal');
-            document.getElementById('vehicleForm').reset();
-            document.getElementById('vehicleId').value = '';
-            renderPhotosPreview();
-            if (mode === 'add') document.getElementById('modalTitle').innerText = 'Novo Veículo';
             modal.classList.remove('hidden');
+            document.getElementById('vehicleForm').reset();
+            tempPhotos = [];
+            renderPhotoPreview();
+
+            if (mode === 'edit' && id !== null) {
+                document.getElementById('modalTitle').innerText = 'Editar Veículo';
+                const v = vehicles.find(item => item.id === id);
+                if (v) {
+                    document.getElementById('vehicleId').value = v.id;
+                    document.getElementById('inputModelo').value = v.modelo || '';
+                    document.getElementById('inputMarca').value = v.marca || '';
+                    document.getElementById('inputPlaca').value = v.placa || '';
+                    document.getElementById('inputAno').value = v.ano || '';
+                    document.getElementById('inputEstado').value = v.estado || 'Bom';
+                    document.getElementById('inputStatus').value = v.status || 'Ativo';
+                    document.getElementById('inputKm').value = v.km || 0;
+                    document.getElementById('inputTecnico').value = v.tecnico || '';
+                    document.getElementById('inputCombustivel').value = v.combustivel || 'Flex (Gas/Alc)';
+                    document.getElementById('inputCor').value = v.cor || '';
+                    document.getElementById('inputObs').value = v.obs || '';
+                    tempPhotos = [...(v.fotos || [])];
+                    renderPhotoPreview();
+                }
+            } else {
+                document.getElementById('modalTitle').innerText = 'Novo Veículo Técnico';
+                document.getElementById('vehicleId').value = '';
+            }
         }
 
         function closeModal() {
@@ -696,160 +666,123 @@
         }
 
         function handlePhotoUpload(event) {
-            const files = Array.from(event.target.files);
-            files.forEach(file => {
+            const files = event.target.files;
+            for (let file of files) {
                 const reader = new FileReader();
-                reader.onload = (e) => {
-                    tempPhotoFiles.push(e.target.result);
-                    renderPhotosPreview();
-                };
+                reader.onload = function(e) {
+                    tempPhotos.push(e.target.result);
+                    renderPhotoPreview();
+                }
                 reader.readAsDataURL(file);
-            });
+            }
         }
 
-        function removeTempPhoto(index) {
-            tempPhotoFiles.splice(index, 1);
-            renderPhotosPreview();
-        }
-
-        function renderPhotosPreview() {
+        function renderPhotoPreview() {
             const container = document.getElementById('photosPreviewContainer');
             container.innerHTML = '';
-            if (tempPhotoFiles.length === 0) {
-                container.innerHTML = `<span class="text-xs text-zinc-500 mx-auto">Nenhuma foto anexada.</span>`;
+            if (tempPhotos.length === 0) {
+                container.innerHTML = '<span id="noPhotosText" class="text-xs text-zinc-500 mx-auto">Nenhuma foto anexada.</span>';
                 return;
             }
-            tempPhotoFiles.forEach((src, idx) => {
-                const thumb = document.createElement('div');
-                thumb.className = 'relative w-16 h-16 rounded-lg overflow-hidden border border-dark-border bg-zinc-900';
-                thumb.innerHTML = `<img src="${src}" class="w-full h-full object-cover"><button type="button" onclick="removeTempPhoto(${idx})" class="absolute top-1 right-1 w-5 h-5 bg-black/80 text-brand-500 rounded-full flex items-center justify-center text-[10px]"><i class="fa-solid fa-xmark"></i></button>`;
-                container.appendChild(thumb);
+            tempPhotos.forEach((src, idx) => {
+                const wrapper = document.createElement('div');
+                wrapper.className = "relative w-16 h-16 rounded-lg overflow-hidden border border-dark-border group";
+                wrapper.innerHTML = `
+                    <img src="${src}" class="w-full h-full object-cover">
+                    <button type="button" onclick="removeTempPhoto(${idx})" class="absolute top-1 right-1 bg-black/80 text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px] hover:bg-brand-600"><i class="fa-solid fa-xmark"></i></button>
+                `;
+                container.appendChild(wrapper);
             });
         }
 
-        // 2. SALVAR OU ATUALIZAR NO SUPABASE
+        function removeTempPhoto(idx) {
+            tempPhotos.splice(idx, 1);
+            renderPhotoPreview();
+        }
+
         async function saveVehicle(event) {
             event.preventDefault();
-            const idInput = document.getElementById('vehicleId').value;
-            
+            const idVal = document.getElementById('vehicleId').value;
             const vehicleData = {
-                modelo: document.getElementById('inputModelo').value.trim(),
-                marca: document.getElementById('inputMarca').value.trim(),
-                placa: document.getElementById('inputPlaca').value.toUpperCase().trim(),
+                modelo: document.getElementById('inputModelo').value,
+                marca: document.getElementById('inputMarca').value,
+                placa: document.getElementById('inputPlaca').value.toUpperCase(),
                 ano: Number(document.getElementById('inputAno').value),
                 estado: document.getElementById('inputEstado').value,
                 status: document.getElementById('inputStatus').value,
                 km: Number(document.getElementById('inputKm').value),
-                tecnico: document.getElementById('inputTecnico').value.trim(),
+                tecnico: document.getElementById('inputTecnico').value,
                 combustivel: document.getElementById('inputCombustivel').value,
-                cor: document.getElementById('inputCor').value.trim(),
-                obs: document.getElementById('inputObs').value.trim(),
-                photos: tempPhotoFiles.length > 0 ? tempPhotoFiles : ['https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80']
+                cor: document.getElementById('inputCor').value,
+                obs: document.getElementById('inputObs').value,
+                fotos: tempPhotos
             };
 
-            if (idInput) {
-                // Atualizar registro existente
-                const { error } = await supabaseClient
-                    .from('veiculos')
-                    .update(vehicleData)
-                    .eq('id', idInput);
-
-                if (error) {
-                    alert('Erro ao atualizar no Supabase: ' + error.message);
+            if (supabaseClient) {
+                try {
+                    if (idVal) {
+                        await supabaseClient.from('veiculos').update(vehicleData).eq('id', idVal);
+                    } else {
+                        await supabaseClient.from('veiculos').insert([vehicleData]);
+                    }
+                    await loadVehicles();
+                    closeModal();
                     return;
+                } catch (err) {
+                    console.error("Erro ao salvar no Supabase:", err);
+                }
+            }
+
+            // Fallback Local
+            if (idVal) {
+                const idx = vehicles.findIndex(v => v.id == idVal);
+                if (idx !== -1) {
+                    vehicles[idx] = { ...vehicles[idx], ...vehicleData };
                 }
             } else {
-                // Inserir novo registro
-                const { error } = await supabaseClient
-                    .from('veiculos')
-                    .insert([vehicleData]);
-
-                if (error) {
-                    alert('Erro ao inserir no Supabase: ' + error.message);
-                    return;
-                }
+                const newId = vehicles.length > 0 ? Math.max(...vehicles.map(v => v.id)) + 1 : 1;
+                vehicles.push({ id: newId, ...vehicleData });
             }
 
+            persistVehicles();
+            renderData();
             closeModal();
-            loadFleetData(); // Recarrega os dados diretamente da nuvem
         }
 
-        function editVehicle(id) {
-            const v = fleetData.find(item => item.id == id);
-            if (!v) return;
-
-            openModal('edit');
-            document.getElementById('modalTitle').innerText = 'Editar Veículo - ' + v.placa;
-            document.getElementById('vehicleId').value = v.id;
-            document.getElementById('inputModelo').value = v.modelo;
-            document.getElementById('inputMarca').value = v.marca;
-            document.getElementById('inputPlaca').value = v.placa;
-            document.getElementById('inputAno').value = v.ano;
-            document.getElementById('inputEstado').value = v.estado;
-            document.getElementById('inputStatus').value = v.status;
-            document.getElementById('inputKm').value = v.km;
-            document.getElementById('inputTecnico').value = v.tecnico || '';
-            document.getElementById('inputCombustivel').value = v.combustivel || 'Flex (Gas/Alc)';
-            document.getElementById('inputCor').value = v.cor || '';
-            document.getElementById('inputObs').value = v.obs || '';
-
-            tempPhotoFiles = v.photos ? [...v.photos] : [];
-            renderPhotosPreview();
-        }
-
-        // 3. EXCLUIR DO SUPABASE
-        async function confirmDelete(id) {
-            const v = fleetData.find(item => item.id == id);
-            if (!v) return;
-
-            if (window.confirm(`Tem certeza que deseja remover o veículo ${v.modelo} (${v.placa})?`)) {
-                const { error } = await supabaseClient
-                    .from('veiculos')
-                    .delete()
-                    .eq('id', id);
-
-                if (error) {
-                    alert('Erro ao excluir: ' + error.message);
-                    return;
+        async function deleteVehicle(id) {
+            if (confirm("Tem certeza que deseja excluir este veículo?")) {
+                if (supabaseClient) {
+                    try {
+                        await supabaseClient.from('veiculos').delete().eq('id', id);
+                        await loadVehicles();
+                        return;
+                    } catch (err) {
+                        console.error("Erro ao deletar no Supabase:", err);
+                    }
                 }
-                loadFleetData();
+                vehicles = vehicles.filter(v => v.id !== id);
+                persistVehicles();
+                renderData();
             }
         }
 
-        function openDetailModal(id) {
-            const v = fleetData.find(item => item.id == id);
+        function openDetail(id) {
+            const v = vehicles.find(item => item.id === id);
             if (!v) return;
 
             document.getElementById('detailBadgePlaca').innerText = v.placa;
-            document.getElementById('detailTitle').innerText = `${v.marca} ${v.modelo}`;
-            document.getElementById('detailSubtitle').innerText = `Responsável: ${v.tecnico || 'Não atribuído'}`;
-            document.getElementById('detailEstado').innerHTML = getStateBadge(v.estado);
-            document.getElementById('detailKm').innerText = Number(v.km || 0).toLocaleString('pt-BR') + ' KM';
-            document.getElementById('detailAnoCombustivel').innerText = `${v.ano} • ${v.combustivel || 'Flex'}`;
-            document.getElementById('detailStatus').innerHTML = getStatusBadge(v.status);
-            document.getElementById('detailObs').innerText = v.obs || 'Nenhuma observação cadastrada.';
+            document.getElementById('detailTitle').innerText = `${v.marca} ${v.modelo} (${v.ano})`;
+            document.getElementById('detailSubtitle').innerText = `Técnico: ${v.tecnico || 'Não atribuído'}`;
+            document.getElementById('detailEstado').innerText = v.estado;
+            document.getElementById('detailKm').innerText = `${Number(v.km).toLocaleString()} km`;
+            document.getElementById('detailAnoCombustivel').innerText = `${v.ano} • ${v.combustivel}`;
+            document.getElementById('detailStatus').innerText = v.status;
+            document.getElementById('detailObs').innerText = v.obs || 'Nenhuma observação informada.';
+            document.getElementById('detailEditBtn').onclick = () => { closeDetailModal(); openModal('edit', v.id); };
 
-            const photos = v.photos && v.photos.length > 0 ? v.photos : ['https://placehold.co/600x400/18181b/dc2626?text=Sem+Foto'];
-            document.getElementById('detailMainImage').src = photos[0];
-            document.getElementById('detailPhotoCounter').innerText = `Foto 1 de ${photos.length}`;
-
-            const thumbsContainer = document.getElementById('detailThumbnails');
-            thumbsContainer.innerHTML = '';
-            photos.forEach((src, idx) => {
-                const img = document.createElement('img');
-                img.src = src;
-                img.className = `w-14 h-14 rounded-lg object-cover cursor-pointer border-2 transition ${idx === 0 ? 'border-brand-500 scale-105' : 'border-transparent opacity-60'}`;
-                img.onclick = () => {
-                    document.getElementById('detailMainImage').src = src;
-                    document.getElementById('detailPhotoCounter').innerText = `Foto ${idx + 1} de ${photos.length}`;
-                };
-                thumbsContainer.appendChild(img);
-            });
-
-            document.getElementById('detailEditBtn').onclick = () => {
-                closeDetailModal();
-                editVehicle(v.id);
-            };
+            currentDetailPhotos = (v.fotos && v.fotos.length > 0) ? v.fotos : ['https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80'];
+            activeDetailPhotoIdx = 0;
+            renderDetailPhotos();
 
             document.getElementById('detailModal').classList.remove('hidden');
         }
@@ -858,32 +791,75 @@
             document.getElementById('detailModal').classList.add('hidden');
         }
 
-        // Exportação para PDF
-        function exportToPDF() {
-            if (fleetData.length === 0) return;
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+        function renderDetailPhotos() {
+            const mainImg = document.getElementById('detailMainImage');
+            const counter = document.getElementById('detailPhotoCounter');
+            const thumbs = document.getElementById('detailThumbnails');
 
-            doc.setFillColor(18, 18, 21);
-            doc.rect(0, 0, 297, 24, 'F');
-            doc.setFontSize(16);
-            doc.setTextColor(239, 68, 68);
-            doc.text('REDFLEET', 14, 13);
-            doc.setFontSize(12);
-            doc.setTextColor(255, 255, 255);
-            doc.text(' - Relatório Técnico de Frota (Supabase)', 42, 13);
+            mainImg.src = currentDetailPhotos[activeDetailPhotoIdx];
+            counter.innerText = `Foto ${activeDetailPhotoIdx + 1} de ${currentDetailPhotos.length}`;
+            thumbs.innerHTML = '';
 
-            const headers = [['Placa', 'Veículo / Modelo', 'Marca', 'Ano', 'Estado', 'Status', 'Quilometragem', 'Técnico / Equipe']];
-            const data = fleetData.map(v => [
-                v.placa || '', v.modelo || '', v.marca || '', v.ano || '', v.estado || '', v.status || '', `${Number(v.km || 0).toLocaleString('pt-BR')} KM`, v.tecnico || '-'
-            ]);
-
-            doc.autoTable({
-                head: headers, body: data, startY: 28, theme: 'grid',
-                headStyles: { fillColor: [185, 28, 28], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 8 },
-                bodyStyles: { fontSize: 8 }
+            currentDetailPhotos.forEach((src, idx) => {
+                const thumb = document.createElement('img');
+                thumb.src = src;
+                thumb.className = `w-14 h-14 rounded-lg object-cover cursor-pointer border transition ${idx === activeDetailPhotoIdx ? 'border-brand-500 scale-105' : 'border-dark-border opacity-60 hover:opacity-100'}`;
+                thumb.onclick = () => {
+                    activeDetailPhotoIdx = idx;
+                    renderDetailPhotos();
+                };
+                thumbs.appendChild(thumb);
             });
-            doc.save(`relatorio_frota_${new Date().toISOString().slice(0,10)}.pdf`);
+        }
+
+        function importCSV(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const lines = e.target.result.split('\n');
+                let count = 0;
+                lines.forEach((line, idx) => {
+                    if (idx === 0 || !line.trim()) return;
+                    const cols = line.split(',');
+                    if (cols.length >= 4) {
+                        vehicles.push({
+                            id: Date.now() + Math.random(),
+                            modelo: cols[1]?.trim() || 'Desconhecido',
+                            marca: cols[0]?.trim() || 'Geral',
+                            placa: cols[2]?.trim() || 'ABC-0000',
+                            ano: Number(cols[3]) || 2022,
+                            estado: 'Bom',
+                            status: 'Ativo',
+                            km: Number(cols[4]) || 10000,
+                            tecnico: cols[5]?.trim() || '',
+                            combustivel: 'Flex (Gas/Alc)',
+                            cor: 'Branco',
+                            obs: 'Importado via CSV',
+                            fotos: []
+                        });
+                        count++;
+                    }
+                });
+                persistVehicles();
+                renderData();
+                alert(`${count} veículos importados com sucesso!`);
+            };
+            reader.readAsText(file);
+        }
+
+        function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.text("Relatorio Geral de Frota - RedFleet", 14, 15);
+            
+            const rows = vehicles.map(v => [v.placa, `${v.marca} ${v.modelo}`, v.ano, v.tecnico || '-', `${v.km} km`, v.estado]);
+            doc.autoTable({
+                head: [['Placa', 'Veiculo', 'Ano', 'Tecnico', 'KM', 'Estado']],
+                body: rows,
+                startY: 20,
+            });
+            doc.save("relatorio_frota.pdf");
         }
     </script>
 </body>
