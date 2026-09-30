@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RedFleet - Gestão de Frota Técnica</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -13,44 +14,108 @@
                 extend: {
                     colors: {
                         brand: {
-                            50: '#fef2f2', 100: '#ffe1e1', 500: '#ef4444', 600: '#dc2626', 700: '#b91c1c', 800: '#991b1b', 900: '#7f1d1d', 950: '#450a0a',
+                            50: '#fef2f2',
+                            100: '#ffe1e1',
+                            500: '#ef4444',
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                            800: '#991b1b',
+                            900: '#7f1d1d',
+                            950: '#450a0a',
                         },
                         dark: {
-                            base: '#09090b', surface: '#121215', card: '#18181b', border: '#27272a', hover: '#27272a'
+                            base: '#09090b',
+                            surface: '#121215',
+                            card: '#18181b',
+                            border: '#27272a',
+                            hover: '#27272a'
                         }
                     },
-                    fontFamily: { sans: ['Inter', 'sans-serif'], }
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
                 }
             }
         }
     </script>
+    
     <!-- Google Fonts Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- jsPDF & AutoTable CDN for PDF Export -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
-    <!-- Supabase JS Client CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <!-- Custom CSS Scrollbars & Styles -->
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #09090b; color: #f4f4f5; }
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #121215; }
-        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #dc2626; }
-        .glass-panel { background: rgba(24, 24, 27, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(220, 38, 38, 0.15); }
-        .glass-card { background: rgba(18, 18, 21, 0.95); border: 1px solid #27272a; transition: all 0.25s ease; }
-        .glass-card:hover { border-color: rgba(220, 38, 38, 0.5); box-shadow: 0 8px 25px -5px rgba(220, 38, 38, 0.15); }
-        tbody tr { transition: background-color 0.15s ease; }
-        tbody tr:hover { background-color: rgba(220, 38, 38, 0.05) !important; }
-        .modal-fade-enter { animation: fadeIn 0.2s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #09090b;
+            color: #f4f4f5;
+        }
+
+        /* Custom Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121215;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #dc2626;
+        }
+
+        .glass-panel {
+            background: rgba(24, 24, 27, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(220, 38, 38, 0.15);
+        }
+
+        .glass-card {
+            background: rgba(18, 18, 21, 0.95);
+            border: 1px solid #27272a;
+            transition: all 0.25s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(220, 38, 38, 0.5);
+            box-shadow: 0 8px 25px -5px rgba(220, 38, 38, 0.15);
+        }
+
+        /* Glow effects */
+        .glow-red {
+            box-shadow: 0 0 20px -3px rgba(220, 38, 38, 0.4);
+        }
+
+        /* Table custom hover */
+        tbody tr {
+            transition: background-color 0.15s ease;
+        }
+        tbody tr:hover {
+            background-color: rgba(220, 38, 38, 0.05) !important;
+        }
+
+        /* Modal backdrop animation */
+        .modal-fade-enter {
+            animation: fadeIn 0.2s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.97); }
+            to { opacity: 1; transform: scale(1); }
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col bg-dark-base text-zinc-100 antialiased selection:bg-brand-600 selection:text-white">
@@ -64,14 +129,15 @@
             <div>
                 <div class="flex items-center space-x-2">
                     <h1 class="text-xl font-black tracking-tight text-white uppercase">Red<span class="text-brand-500">Fleet</span></h1>
-                    <span class="bg-brand-950 text-brand-500 border border-brand-800/60 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">RLS Desativado</span>
+                    <span class="bg-brand-950 text-brand-500 border border-brand-800/60 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Equipe Técnica</span>
                 </div>
                 <p class="text-xs text-zinc-400">Controle Unificado & Planilha de Frota</p>
             </div>
         </div>
-        
+
         <!-- Quick Toolbar Actions -->
         <div class="flex items-center flex-wrap gap-2">
+            <!-- View Toggle -->
             <div class="bg-dark-card border border-dark-border p-1 rounded-xl flex items-center space-x-1">
                 <button id="viewTableBtn" onclick="switchView('table')" class="px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition bg-brand-600 text-white">
                     <i class="fa-solid fa-table-cells"></i>
@@ -83,18 +149,21 @@
                 </button>
             </div>
 
+            <!-- Import CSV button -->
             <label class="cursor-pointer bg-dark-card hover:bg-zinc-800 border border-dark-border text-zinc-300 hover:text-white px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center space-x-2 transition">
                 <i class="fa-solid fa-file-import text-brand-500"></i>
                 <span>Importar CSV</span>
                 <input type="file" id="csvFileInput" accept=".csv" class="hidden" onchange="importCSV(event)">
             </label>
 
+            <!-- Export PDF Button -->
             <button onclick="exportToPDF()" class="bg-dark-card hover:bg-zinc-800 border border-dark-border text-zinc-300 hover:text-white px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center space-x-2 transition">
                 <i class="fa-solid fa-file-pdf text-brand-500"></i>
                 <span>Exportar PDF</span>
             </button>
 
-            <button onclick="openModal('add')" class="bg-gradient-to-r from-brand-700 to-brand-600 hover:from-brand-600 hover:to-brand-500 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-lg shadow-brand-900/40 flex items-center space-x-2 transition transform active:scale-95">
+            <!-- Add Vehicle Button -->
+            <button onclick="openModal('add')" class="bg-gradient-to-r from-brand-700 to-brand-600 hover:from-brand-600 hover:to-brand-500 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-lg shadow-brand-900/40 hover:shadow-brand-600/30 flex items-center space-x-2 transition transform active:scale-95">
                 <i class="fa-solid fa-plus text-sm"></i>
                 <span>Novo Veículo</span>
             </button>
@@ -103,10 +172,14 @@
 
     <!-- Main Container -->
     <main class="flex-1 max-w-[1700px] w-full mx-auto p-4 lg:p-6 space-y-6">
-        
+
         <!-- Metrics & Dashboard Summary Cards -->
         <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Total Vehicles Card -->
             <div class="glass-card p-4 rounded-2xl relative overflow-hidden flex flex-col justify-between">
+                <div class="absolute -right-3 -bottom-3 opacity-10 text-brand-500 text-7xl font-black">
+                    <i class="fa-solid fa-car-side"></i>
+                </div>
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Total Frota</span>
                     <span class="w-8 h-8 rounded-lg bg-zinc-800 border border-zinc-700/60 flex items-center justify-center text-brand-500 text-sm">
@@ -119,6 +192,7 @@
                 </div>
             </div>
 
+            <!-- Conservation Status: Excellent/Good -->
             <div class="glass-card p-4 rounded-2xl relative overflow-hidden flex flex-col justify-between">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Estado Ótimo / Bom</span>
@@ -135,6 +209,7 @@
                 </div>
             </div>
 
+            <!-- Attention Needed -->
             <div class="glass-card p-4 rounded-2xl relative overflow-hidden flex flex-col justify-between">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Atenção / Regular</span>
@@ -150,6 +225,7 @@
                 </div>
             </div>
 
+            <!-- Critical / Repair Needed -->
             <div class="glass-card p-4 rounded-2xl relative overflow-hidden flex flex-col justify-between">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Crítico / Oficina</span>
@@ -168,12 +244,16 @@
 
         <!-- Filter & Search Control Panel -->
         <div class="glass-panel rounded-2xl p-4 flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between">
+            
+            <!-- Search bar -->
             <div class="relative flex-1 min-w-[280px]">
                 <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400 text-sm"></i>
                 <input type="text" id="searchInput" oninput="renderData()" placeholder="Buscar por placa, modelo, marca ou técnico responsável..." class="w-full pl-10 pr-4 py-2.5 bg-dark-surface border border-dark-border focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl text-sm text-zinc-100 placeholder-zinc-500 outline-none transition">
             </div>
 
+            <!-- Filters -->
             <div class="flex flex-wrap items-center gap-2">
+                <!-- Filter by Conservation State -->
                 <div class="flex items-center space-x-1 bg-dark-surface border border-dark-border p-1 rounded-xl text-xs">
                     <span class="text-zinc-500 px-2 font-medium">Estado:</span>
                     <button onclick="setFilter('estado', 'todos')" id="filterStateAll" class="px-2.5 py-1 rounded-lg font-semibold bg-brand-600 text-white transition">Todos</button>
@@ -183,6 +263,7 @@
                     <button onclick="setFilter('estado', 'Ruim')" id="filterStateRuim" class="px-2.5 py-1 rounded-lg font-semibold text-zinc-400 hover:text-white transition">Ruim</button>
                 </div>
 
+                <!-- Sort By Select -->
                 <div class="relative">
                     <select id="sortBySelect" onchange="renderData()" class="bg-dark-surface border border-dark-border hover:border-zinc-700 text-xs text-zinc-200 py-2.5 pl-3 pr-8 rounded-xl outline-none focus:border-brand-500 cursor-pointer appearance-none">
                         <option value="recent">Mais Recentes</option>
@@ -195,6 +276,7 @@
                     <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 text-xs pointer-events-none"></i>
                 </div>
 
+                <!-- Reset Filters Button -->
                 <button onclick="resetFilters()" class="p-2.5 bg-dark-surface hover:bg-zinc-800 border border-dark-border rounded-xl text-zinc-400 hover:text-brand-500 transition" title="Limpar Filtros">
                     <i class="fa-solid fa-arrow-rotate-left text-xs"></i>
                 </button>
@@ -208,41 +290,69 @@
                     <thead>
                         <tr class="bg-dark-surface border-b border-dark-border text-[11px] font-bold uppercase tracking-wider text-zinc-400 select-none">
                             <th class="py-3.5 px-4 text-center w-16">Foto</th>
-                            <th class="py-3.5 px-4 cursor-pointer hover:text-white" onclick="changeSort('modelo')">Veículo / Modelo <i class="fa-solid fa-sort text-[10px] ml-1"></i></th>
-                            <th class="py-3.5 px-4 cursor-pointer hover:text-white" onclick="changeSort('placa')">Placa <i class="fa-solid fa-sort text-[10px] ml-1"></i></th>
-                            <th class="py-3.5 px-4 cursor-pointer hover:text-white text-center" onclick="changeSort('ano')">Ano <i class="fa-solid fa-sort text-[10px] ml-1"></i></th>
+                            <th class="py-3.5 px-4 cursor-pointer hover:text-white" onclick="changeSort('modelo')">
+                                Veículo / Modelo <i class="fa-solid fa-sort text-[10px] ml-1"></i>
+                            </th>
+                            <th class="py-3.5 px-4 cursor-pointer hover:text-white" onclick="changeSort('placa')">
+                                Placa <i class="fa-solid fa-sort text-[10px] ml-1"></i>
+                            </th>
+                            <th class="py-3.5 px-4 cursor-pointer hover:text-white text-center" onclick="changeSort('ano')">
+                                Ano <i class="fa-solid fa-sort text-[10px] ml-1"></i>
+                            </th>
                             <th class="py-3.5 px-4">Técnico / Equipe</th>
-                            <th class="py-3.5 px-4 cursor-pointer hover:text-white text-right" onclick="changeSort('km')">Quilometragem <i class="fa-solid fa-sort text-[10px] ml-1"></i></th>
-                            <th class="py-3.5 px-4 text-center cursor-pointer hover:text-white" onclick="changeSort('estado')">Estado de Conservação <i class="fa-solid fa-sort text-[10px] ml-1"></i></th>
+                            <th class="py-3.5 px-4 cursor-pointer hover:text-white text-right" onclick="changeSort('km')">
+                                Quilometragem <i class="fa-solid fa-sort text-[10px] ml-1"></i>
+                            </th>
+                            <th class="py-3.5 px-4 text-center cursor-pointer hover:text-white" onclick="changeSort('estado')">
+                                Estado de Conservação <i class="fa-solid fa-sort text-[10px] ml-1"></i>
+                            </th>
                             <th class="py-3.5 px-4 text-center">Status</th>
                             <th class="py-3.5 px-4 text-center w-28">Ações</th>
                         </tr>
                     </thead>
-                    <tbody id="vehicleTableBody" class="divide-y divide-dark-border text-sm"></tbody>
+                    <tbody id="vehicleTableBody" class="divide-y divide-dark-border text-sm">
+                        <!-- Rows rendered dynamically via JS -->
+                    </tbody>
                 </table>
             </div>
-            
+
+            <!-- Empty State -->
             <div id="emptyState" class="hidden flex-col items-center justify-center p-12 text-center space-y-3">
                 <div class="w-16 h-16 rounded-full bg-brand-950/40 border border-brand-900/60 flex items-center justify-center text-brand-500 text-2xl">
                     <i class="fa-solid fa-car-burst"></i>
                 </div>
                 <h3 class="text-base font-bold text-white">Nenhum veículo encontrado</h3>
-                <p class="text-xs text-zinc-400 max-w-sm">Tente ajustar os filtros ou cadastre novos itens na frota.</p>
-                <button onclick="openModal('add')" class="mt-2 bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition">+ Cadastrar Veículo</button>
+                <p class="text-xs text-zinc-400 max-w-sm">Tente ajustar os filtros de busca ou insira um novo veículo na sua frota técnica.</p>
+                <button onclick="openModal('add')" class="mt-2 bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition">
+                    + Cadastrar Veículo
+                </button>
             </div>
 
+            <!-- Table Footer Stats Bar -->
             <div class="bg-dark-surface border-t border-dark-border px-4 py-3 flex flex-wrap items-center justify-between text-xs text-zinc-400 gap-2">
-                <div>Exibindo <span id="showingCount" class="font-bold text-white">0</span> de <span id="totalCountFooter" class="font-bold text-white">0</span> veículos registrados</div>
+                <div>
+                    Exibindo <span id="showingCount" class="font-bold text-white">0</span> de <span id="totalCountFooter" class="font-bold text-white">0</span> veículos registrados
+                </div>
+                <div class="flex items-center space-x-2 text-[11px]">
+                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500"></span> <span>Ótimo/Bom</span>
+                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-500 ml-2"></span> <span>Regular</span>
+                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-brand-500 ml-2"></span> <span>Ruim/Manutenção</span>
+                </div>
             </div>
         </div>
 
-        <!-- GALLERY GRID VIEW CONTAINER -->
-        <div id="gridViewContainer" class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+        <!-- GALLERY GRID VIEW CONTAINER (Hidden by default) -->
+        <div id="gridViewContainer" class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <!-- Cards rendered dynamically via JS -->
+        </div>
+
     </main>
 
     <!-- MODAL: Cadastrar / Editar Veículo -->
     <div id="vehicleModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
         <div class="glass-panel w-full max-w-2xl rounded-2xl border border-dark-border shadow-2xl overflow-hidden modal-fade-enter my-8">
+            
+            <!-- Modal Header -->
             <div class="px-6 py-4 bg-dark-surface border-b border-dark-border flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                     <div class="w-9 h-9 rounded-xl bg-brand-950 border border-brand-800 flex items-center justify-center text-brand-500">
@@ -250,244 +360,486 @@
                     </div>
                     <div>
                         <h3 id="modalTitle" class="text-base font-bold text-white">Novo Veículo Técnica</h3>
-                        <p class="text-xs text-zinc-400">Preencha os dados abaixo</p>
+                        <p class="text-xs text-zinc-400">Preencha os dados abaixo para atualizar a planilha da frota</p>
                     </div>
                 </div>
-                <button onclick="closeModal()" class="text-zinc-400 hover:text-white p-2 rounded-lg hover:bg-zinc-800 transition"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button onclick="closeModal()" class="text-zinc-400 hover:text-white p-2 rounded-lg hover:bg-zinc-800 transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
             </div>
-            
+
+            <!-- Modal Form Body -->
             <form id="vehicleForm" onsubmit="saveVehicle(event)" class="p-6 space-y-5">
                 <input type="hidden" id="vehicleId">
+
+                <!-- Photos Upload Section -->
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">Fotos do Veículo</label>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">
+                        Fotos do Veículo <span class="text-brand-500">*</span>
+                    </label>
+
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <label class="border-2 border-dashed border-dark-border hover:border-brand-500/80 bg-dark-surface/50 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer transition text-center min-h-[110px]">
+                        <!-- Dropzone button -->
+                        <label class="border-2 border-dashed border-dark-border hover:border-brand-500/80 bg-dark-surface/50 hover:bg-dark-surface rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer transition text-center min-h-[110px]">
                             <i class="fa-solid fa-cloud-arrow-up text-brand-500 text-2xl mb-1"></i>
                             <span class="text-xs font-semibold text-zinc-300">Carregar Foto</span>
+                            <span class="text-[10px] text-zinc-500">PNG, JPG, WEBP</span>
                             <input type="file" id="photoFileInput" accept="image/*" multiple class="hidden" onchange="handlePhotoUpload(event)">
                         </label>
+
+                        <!-- Preview Gallery Thumbnails -->
                         <div id="photosPreviewContainer" class="sm:col-span-2 flex flex-wrap gap-2 items-center p-2 bg-dark-surface rounded-xl border border-dark-border min-h-[110px]">
                             <span id="noPhotosText" class="text-xs text-zinc-500 mx-auto">Nenhuma foto anexada.</span>
                         </div>
                     </div>
                 </div>
 
+                <!-- Form Fields Grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    
+                    <!-- Modelo -->
                     <div>
-                        <label class="block text-xs font-medium text-zinc-300 mb-1">Modelo <span class="text-brand-500">*</span></label>
-                        <input type="text" id="inputModelo" required placeholder="Ex: Fiat Strada" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
+                        <label class="block text-xs font-medium text-zinc-300 mb-1">Modelo do Veículo <span class="text-brand-500">*</span></label>
+                        <input type="text" id="inputModelo" required placeholder="Ex: Fiat Strada Freedom 1.3" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
                     </div>
+
+                    <!-- Marca / Fabricante -->
                     <div>
-                        <label class="block text-xs font-medium text-zinc-300 mb-1">Marca <span class="text-brand-500">*</span></label>
-                        <input type="text" id="inputMarca" required placeholder="Ex: Fiat" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
+                        <label class="block text-xs font-medium text-zinc-300 mb-1">Marca / Fabricante <span class="text-brand-500">*</span></label>
+                        <input type="text" id="inputMarca" required placeholder="Ex: Fiat, Chevrolet, Toyota" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
                     </div>
+
+                    <!-- Placa -->
                     <div>
-                        <label class="block text-xs font-medium text-zinc-300 mb-1">Placa <span class="text-brand-500">*</span></label>
-                        <input type="text" id="inputPlaca" required placeholder="Ex: ABC-1D23" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white uppercase font-mono tracking-wider outline-none">
+                        <label class="block text-xs font-medium text-zinc-300 mb-1">Placa do Veículo <span class="text-brand-500">*</span></label>
+                        <input type="text" id="inputPlaca" required placeholder="Ex: ABC-1D23" uppercase class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white uppercase font-mono tracking-wider outline-none">
                     </div>
+
+                    <!-- Ano / Modelo -->
                     <div>
-                        <label class="block text-xs font-medium text-zinc-300 mb-1">Ano <span class="text-brand-500">*</span></label>
-                        <input type="number" id="inputAno" required placeholder="Ex: 2023" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
+                        <label class="block text-xs font-medium text-zinc-300 mb-1">Ano / Modelo <span class="text-brand-500">*</span></label>
+                        <input type="number" id="inputAno" min="1990" max="2027" required placeholder="Ex: 2023" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
                     </div>
+
+                    <!-- Estado de Conservação -->
                     <div>
                         <label class="block text-xs font-medium text-zinc-300 mb-1">Estado de Conservação <span class="text-brand-500">*</span></label>
-                        <select id="inputEstado" required class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
-                            <option value="Excelente">✨ Excelente</option>
-                            <option value="Bom">✅ Bom</option>
-                            <option value="Regular">⚠️ Regular</option>
-                            <option value="Ruim">🚨 Ruim / Crítico</option>
+                        <select id="inputEstado" required class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
+                            <option value="Excelente">✨ Excelente (Como novo / Zero avarias)</option>
+                            <option value="Bom">✅ Bom (Mínimo desgaste natural)</option>
+                            <option value="Regular">⚠️ Regular (Avarias leves / Requer atenção)</option>
+                            <option value="Ruim">🚨 Ruim / Crítico (Requer reparo urgente)</option>
                         </select>
                     </div>
+
+                    <!-- Status Operacional -->
                     <div>
                         <label class="block text-xs font-medium text-zinc-300 mb-1">Status Operacional</label>
-                        <select id="inputStatus" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
+                        <select id="inputStatus" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
                             <option value="Ativo">Disponível / Em Campo</option>
                             <option value="Manutenção">Em Manutenção / Oficina</option>
                             <option value="Vistoria">Aguardando Vistoria</option>
-                            <option value="Inativo">Inativo</option>
+                            <option value="Inativo">Inativo / Desativado</option>
                         </select>
                     </div>
+
+                    <!-- Odômetro / KM -->
                     <div>
-                        <label class="block text-xs font-medium text-zinc-300 mb-1">Quilometragem (KM) <span class="text-brand-500">*</span></label>
-                        <input type="number" id="inputKm" required placeholder="Ex: 45200" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
+                        <label class="block text-xs font-medium text-zinc-300 mb-1">Quilometragem Atual (KM) <span class="text-brand-500">*</span></label>
+                        <input type="number" id="inputKm" min="0" required placeholder="Ex: 45200" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
                     </div>
+
+                    <!-- Técnico / Responsável -->
                     <div>
-                        <label class="block text-xs font-medium text-zinc-300 mb-1">Técnico Responsável</label>
-                        <input type="text" id="inputTecnico" placeholder="Ex: Carlos Silva" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
+                        <label class="block text-xs font-medium text-zinc-300 mb-1">Técnico / Equipe Responsável</label>
+                        <input type="text" id="inputTecnico" placeholder="Ex: Equipe Fibra - Carlos Silva" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
                     </div>
+
+                    <!-- Combustível -->
                     <div>
                         <label class="block text-xs font-medium text-zinc-300 mb-1">Combustível</label>
-                        <select id="inputCombustivel" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
-                            <option value="Flex (Gas/Alc)">Flex</option>
+                        <select id="inputCombustivel" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
+                            <option value="Flex (Gas/Alc)">Flex (Gasolina / Álcool)</option>
                             <option value="Diesel">Diesel</option>
                             <option value="Gasolina">Gasolina</option>
+                            <option value="Elétrico/Híbrido">Elétrico / Híbrido</option>
                         </select>
                     </div>
+
+                    <!-- Cor -->
                     <div>
-                        <label class="block text-xs font-medium text-zinc-300 mb-1">Cor</label>
-                        <input type="text" id="inputCor" placeholder="Ex: Branco" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
+                        <label class="block text-xs font-medium text-zinc-300 mb-1">Cor do Veículo</label>
+                        <input type="text" id="inputCor" placeholder="Ex: Branco, Prata, Vermelho" class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none">
                     </div>
+
                 </div>
 
+                <!-- Observações e Avarias -->
                 <div>
-                    <label class="block text-xs font-medium text-zinc-300 mb-1">Observações</label>
-                    <textarea id="inputObs" rows="3" placeholder="Detalhes adicionais..." class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none resize-none"></textarea>
+                    <label class="block text-xs font-medium text-zinc-300 mb-1">Observações Gerais / Detalhes de Conservação</label>
+                    <textarea id="inputObs" rows="3" placeholder="Descreva pequenos arranhões, estado dos pneus, revisões efetuadas ou ferramentas de bordo..." class="w-full bg-dark-surface border border-dark-border focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none resize-none"></textarea>
                 </div>
 
+                <!-- Modal Actions -->
                 <div class="pt-4 border-t border-dark-border flex items-center justify-end space-x-3">
-                    <button type="button" onclick="closeModal()" class="px-4 py-2.5 rounded-xl border border-dark-border text-zinc-300 hover:bg-zinc-800 text-xs font-semibold transition">Cancelar</button>
-                    <button type="submit" class="bg-gradient-to-r from-brand-700 to-brand-600 hover:from-brand-600 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition">Salvar Veículo</button>
+                    <button type="button" onclick="closeModal()" class="px-4 py-2.5 rounded-xl border border-dark-border text-zinc-300 hover:text-white hover:bg-zinc-800 text-xs font-semibold transition">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="bg-gradient-to-r from-brand-700 to-brand-600 hover:from-brand-600 hover:to-brand-500 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition shadow-lg shadow-brand-900/50">
+                        Salvar Veículo
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- MODAL: Detalhes -->
+    <!-- MODAL: Visualizar Ficha / Fotos do Veículo -->
     <div id="detailModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
         <div class="glass-panel w-full max-w-3xl rounded-2xl border border-dark-border shadow-2xl overflow-hidden modal-fade-enter my-8">
+            
+            <!-- Header -->
             <div class="px-6 py-4 bg-dark-surface border-b border-dark-border flex items-center justify-between">
                 <div class="flex items-center space-x-3">
-                    <span id="detailBadgePlaca" class="px-3 py-1 bg-brand-950 border border-brand-800 text-brand-400 font-mono font-bold text-sm rounded-lg">ABC-1D23</span>
+                    <span id="detailBadgePlaca" class="px-3 py-1 bg-brand-950 border border-brand-800 text-brand-400 font-mono font-bold text-sm rounded-lg">
+                        ABC-1D23
+                    </span>
                     <div>
-                        <h3 id="detailTitle" class="text-base font-bold text-white">Fiat Strada</h3>
-                        <p id="detailSubtitle" class="text-xs text-zinc-400">Técnico</p>
+                        <h3 id="detailTitle" class="text-base font-bold text-white">Fiat Strada Freedom</h3>
+                        <p id="detailSubtitle" class="text-xs text-zinc-400">Técnico: Carlos Silva</p>
                     </div>
                 </div>
-                <button onclick="closeDetailModal()" class="text-zinc-400 hover:text-white p-2 rounded-lg hover:bg-zinc-800 transition"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button onclick="closeDetailModal()" class="text-zinc-400 hover:text-white p-2 rounded-lg hover:bg-zinc-800 transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
             </div>
-            
+
+            <!-- Body -->
             <div class="p-6 space-y-6">
+                <!-- Main Image & Gallery -->
                 <div>
-                    <div class="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden bg-zinc-950 border border-dark-border">
-                        <img id="detailMainImage" src="" alt="Foto" class="w-full h-full object-cover">
-                        <div class="absolute bottom-3 right-3 bg-black/75 text-white text-xs px-3 py-1 rounded-full"><span id="detailPhotoCounter">Foto 1 de 1</span></div>
+                    <div class="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden bg-zinc-950 border border-dark-border group">
+                        <img id="detailMainImage" src="" alt="Foto Principal" class="w-full h-full object-cover">
+                        <div class="absolute bottom-3 right-3 bg-black/75 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full border border-white/10">
+                            <span id="detailPhotoCounter">Foto 1 de 1</span>
+                        </div>
                     </div>
-                    <div id="detailThumbnails" class="flex items-center space-x-2 mt-3 overflow-x-auto pb-1"></div>
+                    <!-- Thumbnails row -->
+                    <div id="detailThumbnails" class="flex items-center space-x-2 mt-3 overflow-x-auto pb-1">
+                        <!-- Loaded dynamically -->
+                    </div>
                 </div>
 
+                <!-- Info Grid Cards -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                    <div class="bg-dark-surface border border-dark-border p-3 rounded-xl"><span class="text-zinc-400 text-[10px] block uppercase font-semibold">Estado</span><span id="detailEstado" class="font-bold text-emerald-400 mt-1 block">-</span></div>
-                    <div class="bg-dark-surface border border-dark-border p-3 rounded-xl"><span class="text-zinc-400 text-[10px] block uppercase font-semibold">Quilometragem</span><span id="detailKm" class="font-bold text-white mt-1 block">-</span></div>
-                    <div class="bg-dark-surface border border-dark-border p-3 rounded-xl"><span class="text-zinc-400 text-[10px] block uppercase font-semibold">Ano / Combustível</span><span id="detailAnoCombustivel" class="font-bold text-white mt-1 block">-</span></div>
-                    <div class="bg-dark-surface border border-dark-border p-3 rounded-xl"><span class="text-zinc-400 text-[10px] block uppercase font-semibold">Status</span><span id="detailStatus" class="font-bold text-emerald-400 mt-1 block">-</span></div>
+                    <div class="bg-dark-surface border border-dark-border p-3 rounded-xl">
+                        <span class="text-zinc-400 text-[10px] block font-semibold uppercase">Estado</span>
+                        <span id="detailEstado" class="font-bold text-emerald-400 mt-1 block">Excelente</span>
+                    </div>
+                    <div class="bg-dark-surface border border-dark-border p-3 rounded-xl">
+                        <span class="text-zinc-400 text-[10px] block font-semibold uppercase">Quilometragem</span>
+                        <span id="detailKm" class="font-bold text-white mt-1 block">45.000 KM</span>
+                    </div>
+                    <div class="bg-dark-surface border border-dark-border p-3 rounded-xl">
+                        <span class="text-zinc-400 text-[10px] block font-semibold uppercase">Ano / Combustível</span>
+                        <span id="detailAnoCombustivel" class="font-bold text-white mt-1 block">2023 • Flex</span>
+                    </div>
+                    <div class="bg-dark-surface border border-dark-border p-3 rounded-xl">
+                        <span class="text-zinc-400 text-[10px] block font-semibold uppercase">Status</span>
+                        <span id="detailStatus" class="font-bold text-emerald-400 mt-1 block">Ativo</span>
+                    </div>
                 </div>
 
+                <!-- Details & Observations -->
                 <div class="bg-dark-surface border border-dark-border p-4 rounded-xl space-y-2">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-brand-500">Observações</h4>
-                    <p id="detailObs" class="text-xs text-zinc-300 leading-relaxed">-</p>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-brand-500">Observações de Campo & Conservação</h4>
+                    <p id="detailObs" class="text-xs text-zinc-300 leading-relaxed">Nenhuma observação registrada.</p>
                 </div>
             </div>
 
+            <!-- Footer -->
             <div class="px-6 py-4 bg-dark-surface border-t border-dark-border flex items-center justify-between">
-                <button id="detailEditBtn" class="bg-dark-card hover:bg-zinc-800 border border-dark-border text-zinc-200 px-4 py-2 rounded-xl text-xs font-semibold flex items-center space-x-2 transition"><i class="fa-solid fa-pen-to-square text-brand-500"></i><span>Editar</span></button>
-                <button onclick="closeDetailModal()" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-2 rounded-xl text-xs font-bold transition">Fechar</button>
+                <button id="detailEditBtn" onclick="" class="bg-dark-card hover:bg-zinc-800 border border-dark-border text-zinc-200 px-4 py-2 rounded-xl text-xs font-semibold flex items-center space-x-2 transition">
+                    <i class="fa-solid fa-pen-to-square text-brand-500"></i>
+                    <span>Editar Ficha</span>
+                </button>
+                <button onclick="closeDetailModal()" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-2 rounded-xl text-xs font-bold transition">
+                    Fechar
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Script Application Logic -->
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
     <script>
-        // CONFIGURAÇÃO DO SUPABASE (Insira sua URL e Chave pública anon aqui)
-        const SUPABASE_URL = https://alvkzwlzzeplbofgsdyi.supabase.co;
-        const SUPABASE_ANON_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFsdmt6d2x6emVwbGJvZmdzZHlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3ODM0MTIsImV4cCI6MjEwNjM1OTQxMn0.fKbUvMZRgYl6CSeKLU2yWNtd3OAc3OagvurvlNJRJFk;
-        
-        let supabaseClient = null;
-        try {
-            if (SUPABASE_URL && SUPABASE_ANON_KEY && SUPABASE_URL !== 'SUA_SUPABASE_URL_AQUI') {
-                supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            }
-        } catch (e) {
-            console.warn("Erro ao iniciar Supabase, operando com armazenamento local de fallback.", e);
-        }
+        // Default Mock Data for technical fleet
+        const initialFleet = [];
 
-        let vehicles = [];
-        let currentView = 'table';
+        // Global State
+        let fleetData = [];
+        let currentView = 'table'; // 'table' or 'grid'
         let currentFilterState = 'todos';
-        let currentSortField = 'recent';
-        let tempPhotos = [];
-        let currentDetailPhotos = [];
-        let activeDetailPhotoIdx = 0;
+        let currentSort = 'recent';
+        let tempPhotoFiles = [];
 
+        // Initialize Application
         window.addEventListener('DOMContentLoaded', () => {
-            loadVehicles();
+            loadFleetData();
+            renderData();
         });
 
-        async function loadVehicles() {
-            if (supabaseClient) {
+        // Load data from LocalStorage or Fallback Mock
+        function loadFleetData() {
+            const saved = localStorage.getItem('redfleet_data');
+            if (saved) {
                 try {
-                    const { data, error } = await supabaseClient.from('veiculos').select('*');
-                    if (!error && data) {
-                        vehicles = data.map(item => ({
-                            id: item.id,
-                            modelo: item.modelo,
-                            marca: item.marca,
-                            placa: item.placa,
-                            ano: item.ano,
-                            estado: item.estado,
-                            status: item.status,
-                            km: item.km,
-                            tecnico: item.tecnico,
-                            combustivel: item.combustivel,
-                            cor: item.cor,
-                            obs: item.obs,
-                            fotos: item.fotos || []
-                        }));
-                        renderData();
-                        return;
-                    }
-                } catch (err) {
-                    console.error("Erro ao carregar do Supabase:", err);
+                    let parsed = JSON.parse(saved);
+                    // Filter out initial sample data if present in local storage
+                    fleetData = parsed.filter(item => !['v-101', 'v-102', 'v-103', 'v-104'].includes(item.id));
+                    saveToLocalStorage();
+                } catch(e) {
+                    fleetData = [];
                 }
-            }
-            // Fallback para localStorage
-            const local = localStorage.getItem('redfleet_vehicles');
-            if (local) {
-                vehicles = JSON.parse(local);
             } else {
-                vehicles = [
-                    { id: 1, modelo: 'Strada Working', marca: 'Fiat', placa: 'ABC-1D23', ano: 2022, estado: 'Excelente', status: 'Ativo', km: 34200, tecnico: 'Carlos Silva', combustivel: 'Flex (Gas/Alc)', cor: 'Branco', obs: 'Revisão em dia.', fotos: [] },
-                    { id: 2, modelo: 'Saveiro Robust', marca: 'Volkswagen', placa: 'XYZ-9W88', ano: 2021, estado: 'Bom', status: 'Ativo', km: 58100, tecnico: 'Mariana Souza', combustivel: 'Flex (Gas/Alc)', cor: 'Prata', obs: 'Troca de pneus recente.', fotos: [] }
-                ];
+                fleetData = [];
+                saveToLocalStorage();
             }
-            renderData();
         }
 
-        async function persistVehicles() {
-            if (supabaseClient) {
-                // Se conectado, sincroniza as alterações individualmente ou viaupsert
-            }
-            localStorage.setItem('redfleet_vehicles', JSON.stringify(vehicles));
+        function saveToLocalStorage() {
+            localStorage.setItem('redfleet_data', JSON.stringify(fleetData));
         }
 
+        // View Switcher
         function switchView(view) {
             currentView = view;
             const tableContainer = document.getElementById('tableViewContainer');
             const gridContainer = document.getElementById('gridViewContainer');
-            const btnTable = document.getElementById('viewTableBtn');
-            const btnGrid = document.getElementById('viewGridBtn');
+            const viewTableBtn = document.getElementById('viewTableBtn');
+            const viewGridBtn = document.getElementById('viewGridBtn');
 
             if (view === 'table') {
                 tableContainer.classList.remove('hidden');
                 gridContainer.classList.add('hidden');
-                btnTable.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition bg-brand-600 text-white";
-                btnGrid.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-zinc-400 hover:text-white flex items-center space-x-1.5 transition";
+                viewTableBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition bg-brand-600 text-white";
+                viewGridBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-zinc-400 hover:text-white flex items-center space-x-1.5 transition";
             } else {
                 tableContainer.classList.add('hidden');
                 gridContainer.classList.remove('hidden');
-                btnGrid.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition bg-brand-600 text-white";
-                btnTable.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-zinc-400 hover:text-white flex items-center space-x-1.5 transition";
+                viewGridBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition bg-brand-600 text-white";
+                viewTableBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-zinc-400 hover:text-white flex items-center space-x-1.5 transition";
             }
             renderData();
         }
 
-        function setFilter(type, val) {
-            currentFilterState = val;
-            ['todos', 'Excelente', 'Bom', 'Regular', 'Ruim'].forEach(st => {
-                const el = document.getElementById('filterState' + (st === 'todos' ? 'All' : st === 'Excelente' ? 'Exc' : st === 'Bom' ? 'Bom' : st === 'Regular' ? 'Reg' : 'Ruim'));
-                if (el) {
-                    el.className = (st === val) ? "px-2.5 py-1 rounded-lg font-semibold bg-brand-600 text-white transition" : "px-2.5 py-1 rounded-lg font-semibold text-zinc-400 hover:text-white transition";
-                }
+        // Filter and Sort Handler
+        function getFilteredAndSortedData() {
+            const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
+            const sortVal = document.getElementById('sortBySelect').value;
+
+            return fleetData.filter(item => {
+                // Search term match
+                const matchSearch = item.modelo.toLowerCase().includes(searchVal) ||
+                                    item.placa.toLowerCase().includes(searchVal) ||
+                                    item.marca.toLowerCase().includes(searchVal) ||
+                                    (item.tecnico && item.tecnico.toLowerCase().includes(searchVal));
+
+                // State filter
+                const matchState = (currentFilterState === 'todos') || (item.estado === currentFilterState);
+
+                return matchSearch && matchState;
+            }).sort((a, b) => {
+                if (sortVal === 'year-desc') return b.ano - a.ano;
+                if (sortVal === 'year-asc') return a.ano - b.ano;
+                if (sortVal === 'km-asc') return a.km - b.km;
+                if (sortVal === 'km-desc') return b.km - a.km;
+                if (sortVal === 'plate') return a.placa.localeCompare(b.placa);
+                return 0; // Recent default order
             });
+        }
+
+        // Render main view
+        function renderData() {
+            const items = getFilteredAndSortedData();
+            updateStats();
+
+            // Render Table Body
+            const tbody = document.getElementById('vehicleTableBody');
+            const emptyState = document.getElementById('emptyState');
+            tbody.innerHTML = '';
+
+            if (items.length === 0) {
+                emptyState.classList.remove('hidden');
+                emptyState.classList.add('flex');
+            } else {
+                emptyState.classList.add('hidden');
+                emptyState.classList.remove('flex');
+            }
+
+            items.forEach(v => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-dark-border/60 hover:bg-dark-surface/50';
+
+                const photoUrl = (v.photos && v.photos.length > 0) ? v.photos[0] : 'https://placehold.co/100x100/18181b/dc2626?text=Sem+Foto';
+
+                tr.innerHTML = `
+                    <td class="py-3 px-4 text-center">
+                        <div class="w-11 h-11 rounded-lg overflow-hidden border border-dark-border mx-auto bg-zinc-900 cursor-pointer shadow-sm group relative" onclick="openDetailModal('${v.id}')">
+                            <img src="${photoUrl}" alt="${v.modelo}" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                        </div>
+                    </td>
+                    <td class="py-3 px-4">
+                        <div class="font-bold text-white text-sm cursor-pointer hover:text-brand-500 transition" onclick="openDetailModal('${v.id}')">${v.modelo}</div>
+                        <div class="text-[11px] text-zinc-400">${v.marca} • <span class="text-zinc-500">${v.cor || 'N/I'}</span></div>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="inline-block bg-dark-card border border-brand-900/60 text-brand-400 font-mono font-bold text-xs px-2.5 py-1 rounded-md tracking-wider">
+                            ${v.placa}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-center text-xs font-medium text-zinc-300">
+                        ${v.ano}
+                    </td>
+                    <td class="py-3 px-4 text-xs">
+                        <div class="text-zinc-200 font-semibold">${v.tecnico || 'Não atribuído'}</div>
+                        <div class="text-[10px] text-zinc-500">${v.combustivel || 'Flex'}</div>
+                    </td>
+                    <td class="py-3 px-4 text-right font-mono font-bold text-xs text-white">
+                        ${Number(v.km).toLocaleString('pt-BR')} KM
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        ${getStateBadge(v.estado)}
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        ${getStatusBadge(v.status)}
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <div class="flex items-center justify-center space-x-1.5">
+                            <button onclick="openDetailModal('${v.id}')" class="p-1.5 text-zinc-400 hover:text-sky-400 hover:bg-zinc-800 rounded-lg transition" title="Ver Detalhes">
+                                <i class="fa-solid fa-eye text-xs"></i>
+                            </button>
+                            <button onclick="editVehicle('${v.id}')" class="p-1.5 text-zinc-400 hover:text-amber-400 hover:bg-zinc-800 rounded-lg transition" title="Editar">
+                                <i class="fa-solid fa-pen-to-square text-xs"></i>
+                            </button>
+                            <button onclick="confirmDelete('${v.id}')" class="p-1.5 text-zinc-400 hover:text-brand-500 hover:bg-zinc-800 rounded-lg transition" title="Excluir">
+                                <i class="fa-solid fa-trash-can text-xs"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Render Grid Cards
+            const gridBody = document.getElementById('gridViewContainer');
+            gridBody.innerHTML = '';
+            items.forEach(v => {
+                const photoUrl = (v.photos && v.photos.length > 0) ? v.photos[0] : 'https://placehold.co/400x300/18181b/dc2626?text=Sem+Foto';
+
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-2xl overflow-hidden flex flex-col justify-between group';
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-44 w-full bg-zinc-950 overflow-hidden">
+                            <img src="${photoUrl}" alt="${v.modelo}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            <div class="absolute top-2 right-2">
+                                ${getStateBadge(v.estado)}
+                            </div>
+                            <div class="absolute bottom-2 left-2">
+                                <span class="bg-black/80 backdrop-blur-md text-brand-400 border border-brand-900 font-mono font-bold text-xs px-2.5 py-0.5 rounded-md">
+                                    ${v.placa}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4 space-y-2">
+                            <div>
+                                <h4 class="font-bold text-white text-base leading-snug group-hover:text-brand-500 transition">${v.modelo}</h4>
+                                <p class="text-xs text-zinc-400">${v.marca} • Ano ${v.ano}</p>
+                            </div>
+                            <div class="text-xs text-zinc-300 bg-dark-surface p-2.5 rounded-xl border border-dark-border space-y-1">
+                                <div class="flex justify-between"><span class="text-zinc-500">Técnico:</span> <span class="font-medium text-right">${v.tecnico || 'N/A'}</span></div>
+                                <div class="flex justify-between"><span class="text-zinc-500">Odômetro:</span> <span class="font-bold text-white">${Number(v.km).toLocaleString('pt-BR')} KM</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0 border-t border-dark-border/50 flex items-center justify-between mt-2">
+                        <span class="text-xs">${getStatusBadge(v.status)}</span>
+                        <div class="flex items-center space-x-1">
+                            <button onclick="openDetailModal('${v.id}')" class="px-2.5 py-1.5 bg-dark-surface hover:bg-zinc-800 text-zinc-200 text-xs rounded-lg transition font-semibold">
+                                Detalhes
+                            </button>
+                            <button onclick="editVehicle('${v.id}')" class="p-1.5 text-zinc-400 hover:text-white rounded-lg transition">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                gridBody.appendChild(card);
+            });
+
+            // Update Counts in Footer
+            document.getElementById('showingCount').innerText = items.length;
+            document.getElementById('totalCountFooter').innerText = fleetData.length;
+        }
+
+        // Helper badges
+        function getStateBadge(estado) {
+            switch(estado) {
+                case 'Excelente':
+                    return `<span class="inline-flex items-center space-x-1 bg-emerald-950/80 text-emerald-400 border border-emerald-800/80 px-2.5 py-0.5 rounded-full text-[11px] font-bold"><i class="fa-solid fa-circle text-[6px] mr-1"></i>Excelente</span>`;
+                case 'Bom':
+                    return `<span class="inline-flex items-center space-x-1 bg-teal-950/80 text-teal-400 border border-teal-800/80 px-2.5 py-0.5 rounded-full text-[11px] font-bold"><i class="fa-solid fa-circle text-[6px] mr-1"></i>Bom</span>`;
+                case 'Regular':
+                    return `<span class="inline-flex items-center space-x-1 bg-amber-950/80 text-amber-400 border border-amber-800/80 px-2.5 py-0.5 rounded-full text-[11px] font-bold"><i class="fa-solid fa-circle text-[6px] mr-1"></i>Regular</span>`;
+                case 'Ruim':
+                default:
+                    return `<span class="inline-flex items-center space-x-1 bg-brand-950/90 text-brand-400 border border-brand-800/90 px-2.5 py-0.5 rounded-full text-[11px] font-bold"><i class="fa-solid fa-circle text-[6px] mr-1"></i>Ruim / Crítico</span>`;
+            }
+        }
+
+        function getStatusBadge(status) {
+            switch(status) {
+                case 'Ativo':
+                    return `<span class="text-xs font-semibold text-emerald-400"><i class="fa-solid fa-check text-[10px] mr-1"></i>Ativo</span>`;
+                case 'Manutenção':
+                    return `<span class="text-xs font-semibold text-brand-500"><i class="fa-solid fa-wrench text-[10px] mr-1"></i>Oficina</span>`;
+                case 'Vistoria':
+                    return `<span class="text-xs font-semibold text-amber-400"><i class="fa-solid fa-clipboard-check text-[10px] mr-1"></i>Vistoria</span>`;
+                default:
+                    return `<span class="text-xs font-semibold text-zinc-500">Inativo</span>`;
+            }
+        }
+
+        // Stats Counter Update
+        function updateStats() {
+            const total = fleetData.length;
+            document.getElementById('statTotalCount').innerText = total;
+
+            const goodCount = fleetData.filter(v => v.estado === 'Excelente' || v.estado === 'Bom').length;
+            const warningCount = fleetData.filter(v => v.estado === 'Regular').length;
+            const criticalCount = fleetData.filter(v => v.estado === 'Ruim' || v.status === 'Manutenção').length;
+
+            const goodPct = total > 0 ? Math.round((goodCount / total) * 100) : 0;
+
+            document.getElementById('statGoodCount').innerText = goodCount;
+            document.getElementById('statGoodPct').innerText = `(${goodPct}%)`;
+            document.getElementById('statWarningCount').innerText = warningCount;
+            document.getElementById('statCriticalCount').innerText = criticalCount;
+        }
+
+        // Filter Controls
+        function setFilter(type, value) {
+            if (type === 'estado') {
+                currentFilterState = value;
+                ['All', 'Exc', 'Bom', 'Reg', 'Ruim'].forEach(k => {
+                    const btn = document.getElementById('filterState' + k);
+                    if (btn) {
+                        btn.className = "px-2.5 py-1 rounded-lg font-semibold text-zinc-400 hover:text-white transition";
+                    }
+                });
+                const keyMap = { 'todos': 'All', 'Excelente': 'Exc', 'Bom': 'Bom', 'Regular': 'Reg', 'Ruim': 'Ruim' };
+                const activeBtn = document.getElementById('filterState' + keyMap[value]);
+                if (activeBtn) activeBtn.className = "px-2.5 py-1 rounded-lg font-semibold bg-brand-600 text-white transition";
+            }
             renderData();
         }
 
@@ -497,369 +849,316 @@
             setFilter('estado', 'todos');
         }
 
-        function changeSort(field) {
+        function changeSort(col) {
             const select = document.getElementById('sortBySelect');
-            if (field === 'modelo') select.value = 'plate';
-            else if (field === 'placa') select.value = 'plate';
-            else if (field === 'ano') select.value = 'year-desc';
-            else if (field === 'km') select.value = 'km-asc';
-            else if (field === 'estado') select.value = 'recent';
+            if (col === 'ano') select.value = select.value === 'year-desc' ? 'year-asc' : 'year-desc';
+            if (col === 'km') select.value = select.value === 'km-desc' ? 'km-asc' : 'km-desc';
+            if (col === 'placa') select.value = 'plate';
             renderData();
         }
 
-        function renderData() {
-            const search = document.getElementById('searchInput').value.toLowerCase();
-            const sortVal = document.getElementById('sortBySelect').value;
-
-            let filtered = vehicles.filter(v => {
-                const matchesSearch = (v.modelo + ' ' + v.marca + ' ' + v.placa + ' ' + (v.tecnico || '')).toLowerCase().includes(search);
-                const matchesState = (currentFilterState === 'todos' || v.estado === currentFilterState);
-                return matchesSearch && matchesState;
-            });
-
-            // Ordenação
-            filtered.sort((a, b) => {
-                if (sortVal === 'year-desc') return b.ano - a.ano;
-                if (sortVal === 'year-asc') return a.ano - b.ano;
-                if (sortVal === 'km-asc') return a.km - b.km;
-                if (sortVal === 'km-desc') return b.km - a.km;
-                if (sortVal === 'plate') return a.placa.localeCompare(b.placa);
-                return b.id - a.id; // recent
-            });
-
-            // Métricas
-            const total = vehicles.length;
-            const goodCount = vehicles.filter(v => v.estado === 'Excelente' || v.estado === 'Bom').length;
-            const warningCount = vehicles.filter(v => v.estado === 'Regular').length;
-            const criticalCount = vehicles.filter(v => v.estado === 'Ruim').length;
-
-            document.getElementById('statTotalCount').innerText = total;
-            document.getElementById('statGoodCount').innerText = goodCount;
-            document.getElementById('statGoodPct').innerText = `(${total > 0 ? Math.round((goodCount/total)*100) : 0}%)`;
-            document.getElementById('statWarningCount').innerText = warningCount;
-            document.getElementById('statCriticalCount').innerText = criticalCount;
-            document.getElementById('showingCount').innerText = filtered.length;
-            document.getElementById('totalCountFooter').innerText = total;
-
-            const tbody = document.getElementById('vehicleTableBody');
-            const grid = document.getElementById('gridViewContainer');
-            const emptyState = document.getElementById('emptyState');
-
-            tbody.innerHTML = '';
-            grid.innerHTML = '';
-
-            if (filtered.length === 0) {
-                emptyState.classList.remove('hidden');
-                emptyState.classList.add('flex');
-                return;
-            } else {
-                emptyState.classList.remove('flex');
-                emptyState.classList.add('hidden');
-            }
-
-            filtered.forEach(v => {
-                const mainImg = (v.fotos && v.fotos.length > 0) ? v.fotos[0] : 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=300&q=80';
-                
-                // Badge de Estado
-                let stateBadge = '';
-                if(v.estado === 'Excelente') stateBadge = '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-950/80 text-emerald-400 border border-emerald-800/60">✨ Excelente</span>';
-                else if(v.estado === 'Bom') stateBadge = '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-blue-950/80 text-blue-400 border border-blue-800/60">✅ Bom</span>';
-                else if(v.estado === 'Regular') stateBadge = '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-950/80 text-amber-400 border border-amber-800/60">⚠️ Regular</span>';
-                else stateBadge = '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-brand-950/80 text-brand-400 border border-brand-800/60">🚨 Ruim</span>';
-
-                // Status Operacional
-                let statusBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-zinc-800 text-zinc-300">Ativo</span>';
-                if(v.status === 'Manutenção') statusBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-brand-950 text-brand-400 border border-brand-800">Oficina</span>';
-                else if(v.status === 'Vistoria') statusBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-950 text-amber-400 border border-amber-800">Vistoria</span>';
-
-                // Tabela
-                const tr = document.createElement('tr');
-                tr.className = "border-b border-dark-border hover:bg-dark-surface/50 text-xs";
-                tr.innerHTML = `
-                    <td class="py-3 px-4 text-center">
-                        <img src="${mainImg}" class="w-10 h-10 rounded-lg object-cover mx-auto cursor-pointer border border-dark-border" onclick="openDetail(${v.id})">
-                    </td>
-                    <td class="py-3 px-4 font-semibold text-white cursor-pointer" onclick="openDetail(${v.id})">
-                        ${v.modelo} <span class="text-zinc-500 font-normal block text-[11px]">${v.marca}</span>
-                    </td>
-                    <td class="py-3 px-4 font-mono font-bold text-brand-400">${v.placa}</td>
-                    <td class="py-3 px-4 text-center text-zinc-300">${v.ano}</td>
-                    <td class="py-3 px-4 text-zinc-300">${v.tecnico || 'Não atribuído'}</td>
-                    <td class="py-3 px-4 text-right font-mono text-zinc-200">${Number(v.km).toLocaleString()} km</td>
-                    <td class="py-3 px-4 text-center">${stateBadge}</td>
-                    <td class="py-3 px-4 text-center">${statusBadge}</td>
-                    <td class="py-3 px-4 text-center">
-                        <div class="flex items-center justify-center space-x-1">
-                            <button onclick="openDetail(${v.id})" class="p-1.5 hover:bg-zinc-800 rounded text-zinc-400 hover:text-white transition" title="Ver Detalhes"><i class="fa-solid fa-eye"></i></button>
-                            <button onclick="openModal('edit', ${v.id})" class="p-1.5 hover:bg-zinc-800 rounded text-zinc-400 hover:text-brand-500 transition" title="Editar"><i class="fa-solid fa-pen"></i></button>
-                            <button onclick="deleteVehicle(${v.id})" class="p-1.5 hover:bg-zinc-800 rounded text-zinc-400 hover:text-brand-600 transition" title="Excluir"><i class="fa-solid fa-trash"></i></button>
-                        </div>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-
-                // Grid Card
-                const card = document.createElement('div');
-                card.className = "glass-card rounded-2xl overflow-hidden flex flex-col justify-between";
-                card.innerHTML = `
-                    <div>
-                        <div class="relative h-44 w-full bg-zinc-950 overflow-hidden cursor-pointer" onclick="openDetail(${v.id})">
-                            <img src="${mainImg}" class="w-full h-full object-cover">
-                            <div class="absolute top-2 left-2">${stateBadge}</div>
-                            <div class="absolute top-2 right-2 bg-black/75 px-2 py-0.5 rounded font-mono font-bold text-xs text-white">${v.placa}</div>
-                        </div>
-                        <div class="p-4 space-y-2">
-                            <h4 class="font-bold text-white text-sm cursor-pointer" onclick="openDetail(${v.id})">${v.marca} ${v.modelo} (${v.ano})</h4>
-                            <p class="text-xs text-zinc-400"><i class="fa-solid fa-user-gear mr-1 text-brand-500"></i> ${v.tecnico || 'Sem técnico'}</p>
-                            <div class="flex items-center justify-between text-xs pt-1 border-t border-dark-border text-zinc-300">
-                                <span><i class="fa-solid fa-road mr-1 text-zinc-500"></i> ${Number(v.km).toLocaleString()} km</span>
-                                <span>${statusBadge}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-dark-surface border-t border-dark-border flex items-center justify-between">
-                        <button onclick="openDetail(${v.id})" class="text-xs font-semibold text-zinc-300 hover:text-white transition">Detalhes</button>
-                        <div class="space-x-1">
-                            <button onclick="openModal('edit', ${v.id})" class="p-1.5 hover:bg-zinc-800 rounded text-zinc-400 hover:text-brand-500"><i class="fa-solid fa-pen text-xs"></i></button>
-                            <button onclick="deleteVehicle(${v.id})" class="p-1.5 hover:bg-zinc-800 rounded text-zinc-400 hover:text-brand-600"><i class="fa-solid fa-trash text-xs"></i></button>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
+        // Modal Controls & Form Submissions
         function openModal(mode, id = null) {
+            tempPhotoFiles = [];
             const modal = document.getElementById('vehicleModal');
-            modal.classList.remove('hidden');
-            document.getElementById('vehicleForm').reset();
-            tempPhotos = [];
-            renderPhotoPreview();
+            const form = document.getElementById('vehicleForm');
+            form.reset();
+            document.getElementById('vehicleId').value = '';
+            renderPhotosPreview();
 
-            if (mode === 'edit' && id !== null) {
-                document.getElementById('modalTitle').innerText = 'Editar Veículo';
-                const v = vehicles.find(item => item.id === id);
-                if (v) {
-                    document.getElementById('vehicleId').value = v.id;
-                    document.getElementById('inputModelo').value = v.modelo || '';
-                    document.getElementById('inputMarca').value = v.marca || '';
-                    document.getElementById('inputPlaca').value = v.placa || '';
-                    document.getElementById('inputAno').value = v.ano || '';
-                    document.getElementById('inputEstado').value = v.estado || 'Bom';
-                    document.getElementById('inputStatus').value = v.status || 'Ativo';
-                    document.getElementById('inputKm').value = v.km || 0;
-                    document.getElementById('inputTecnico').value = v.tecnico || '';
-                    document.getElementById('inputCombustivel').value = v.combustivel || 'Flex (Gas/Alc)';
-                    document.getElementById('inputCor').value = v.cor || '';
-                    document.getElementById('inputObs').value = v.obs || '';
-                    tempPhotos = [...(v.fotos || [])];
-                    renderPhotoPreview();
-                }
-            } else {
-                document.getElementById('modalTitle').innerText = 'Novo Veículo Técnico';
-                document.getElementById('vehicleId').value = '';
+            if (mode === 'add') {
+                document.getElementById('modalTitle').innerText = 'Novo Veículo da Frota';
             }
+            modal.classList.remove('hidden');
         }
 
         function closeModal() {
             document.getElementById('vehicleModal').classList.add('hidden');
         }
 
+        // Handle Photo Files Upload & Base64 Converter
         function handlePhotoUpload(event) {
-            const files = event.target.files;
-            for (let file of files) {
+            const files = Array.from(event.target.files);
+            files.forEach(file => {
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    tempPhotos.push(e.target.result);
-                    renderPhotoPreview();
-                }
+                reader.onload = (e) => {
+                    tempPhotoFiles.push(e.target.result);
+                    renderPhotosPreview();
+                };
                 reader.readAsDataURL(file);
-            }
-        }
-
-        function renderPhotoPreview() {
-            const container = document.getElementById('photosPreviewContainer');
-            container.innerHTML = '';
-            if (tempPhotos.length === 0) {
-                container.innerHTML = '<span id="noPhotosText" class="text-xs text-zinc-500 mx-auto">Nenhuma foto anexada.</span>';
-                return;
-            }
-            tempPhotos.forEach((src, idx) => {
-                const wrapper = document.createElement('div');
-                wrapper.className = "relative w-16 h-16 rounded-lg overflow-hidden border border-dark-border group";
-                wrapper.innerHTML = `
-                    <img src="${src}" class="w-full h-full object-cover">
-                    <button type="button" onclick="removeTempPhoto(${idx})" class="absolute top-1 right-1 bg-black/80 text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px] hover:bg-brand-600"><i class="fa-solid fa-xmark"></i></button>
-                `;
-                container.appendChild(wrapper);
             });
         }
 
-        function removeTempPhoto(idx) {
-            tempPhotos.splice(idx, 1);
-            renderPhotoPreview();
+        function removeTempPhoto(index) {
+            tempPhotoFiles.splice(index, 1);
+            renderPhotosPreview();
         }
 
-        async function saveVehicle(event) {
+        function renderPhotosPreview() {
+            const container = document.getElementById('photosPreviewContainer');
+            container.innerHTML = '';
+
+            if (tempPhotoFiles.length === 0) {
+                container.innerHTML = `<span id="noPhotosText" class="text-xs text-zinc-500 mx-auto">Nenhuma foto anexada.</span>`;
+                return;
+            }
+
+            tempPhotoFiles.forEach((src, idx) => {
+                const thumb = document.createElement('div');
+                thumb.className = 'relative w-16 h-16 rounded-lg overflow-hidden border border-dark-border group bg-zinc-900';
+                thumb.innerHTML = `
+                    <img src="${src}" class="w-full h-full object-cover">
+                    <button type="button" onclick="removeTempPhoto(${idx})" class="absolute top-1 right-1 w-5 h-5 bg-black/80 text-brand-500 hover:text-white rounded-full flex items-center justify-center text-[10px] transition">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                `;
+                container.appendChild(thumb);
+            });
+        }
+
+        // Save / Update Vehicle
+        function saveVehicle(event) {
             event.preventDefault();
-            const idVal = document.getElementById('vehicleId').value;
-            const vehicleData = {
-                modelo: document.getElementById('inputModelo').value,
-                marca: document.getElementById('inputMarca').value,
-                placa: document.getElementById('inputPlaca').value.toUpperCase(),
+            const id = document.getElementById('vehicleId').value;
+            
+            const newVehicle = {
+                id: id || 'v-' + Date.now(),
+                modelo: document.getElementById('inputModelo').value.trim(),
+                marca: document.getElementById('inputMarca').value.trim(),
+                placa: document.getElementById('inputPlaca').value.toUpperCase().trim(),
                 ano: Number(document.getElementById('inputAno').value),
                 estado: document.getElementById('inputEstado').value,
                 status: document.getElementById('inputStatus').value,
                 km: Number(document.getElementById('inputKm').value),
-                tecnico: document.getElementById('inputTecnico').value,
+                tecnico: document.getElementById('inputTecnico').value.trim(),
                 combustivel: document.getElementById('inputCombustivel').value,
-                cor: document.getElementById('inputCor').value,
-                obs: document.getElementById('inputObs').value,
-                fotos: tempPhotos
+                cor: document.getElementById('inputCor').value.trim(),
+                obs: document.getElementById('inputObs').value.trim(),
+                photos: tempPhotoFiles.length > 0 ? [...tempPhotoFiles] : (id ? getVehiclePhotos(id) : ['https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80'])
             };
 
-            if (supabaseClient) {
-                try {
-                    if (idVal) {
-                        await supabaseClient.from('veiculos').update(vehicleData).eq('id', idVal);
-                    } else {
-                        await supabaseClient.from('veiculos').insert([vehicleData]);
-                    }
-                    await loadVehicles();
-                    closeModal();
-                    return;
-                } catch (err) {
-                    console.error("Erro ao salvar no Supabase:", err);
-                }
-            }
-
-            // Fallback Local
-            if (idVal) {
-                const idx = vehicles.findIndex(v => v.id == idVal);
-                if (idx !== -1) {
-                    vehicles[idx] = { ...vehicles[idx], ...vehicleData };
-                }
+            if (id) {
+                const index = fleetData.findIndex(v => v.id === id);
+                if (index !== -1) fleetData[index] = newVehicle;
             } else {
-                const newId = vehicles.length > 0 ? Math.max(...vehicles.map(v => v.id)) + 1 : 1;
-                vehicles.push({ id: newId, ...vehicleData });
+                fleetData.unshift(newVehicle);
             }
 
-            persistVehicles();
+            saveToLocalStorage();
             renderData();
             closeModal();
         }
 
-        async function deleteVehicle(id) {
-            if (confirm("Tem certeza que deseja excluir este veículo?")) {
-                if (supabaseClient) {
-                    try {
-                        await supabaseClient.from('veiculos').delete().eq('id', id);
-                        await loadVehicles();
-                        return;
-                    } catch (err) {
-                        console.error("Erro ao deletar no Supabase:", err);
-                    }
-                }
-                vehicles = vehicles.filter(v => v.id !== id);
-                persistVehicles();
+        function getVehiclePhotos(id) {
+            const v = fleetData.find(item => item.id === id);
+            return v ? v.photos : [];
+        }
+
+        // Edit Vehicle Fill
+        function editVehicle(id) {
+            const v = fleetData.find(item => item.id === id);
+            if (!v) return;
+
+            openModal('edit');
+            document.getElementById('modalTitle').innerText = 'Editar Veículo - ' + v.placa;
+            document.getElementById('vehicleId').value = v.id;
+            document.getElementById('inputModelo').value = v.modelo;
+            document.getElementById('inputMarca').value = v.marca;
+            document.getElementById('inputPlaca').value = v.placa;
+            document.getElementById('inputAno').value = v.ano;
+            document.getElementById('inputEstado').value = v.estado;
+            document.getElementById('inputStatus').value = v.status;
+            document.getElementById('inputKm').value = v.km;
+            document.getElementById('inputTecnico').value = v.tecnico || '';
+            document.getElementById('inputCombustivel').value = v.combustivel || 'Flex (Gas/Alc)';
+            document.getElementById('inputCor').value = v.cor || '';
+            document.getElementById('inputObs').value = v.obs || '';
+
+            tempPhotoFiles = v.photos ? [...v.photos] : [];
+            renderPhotosPreview();
+        }
+
+        // Delete Vehicle
+        function confirmDelete(id) {
+            const v = fleetData.find(item => item.id === id);
+            if (!v) return;
+
+            // Custom UI Modal deletion prompt fallback without standard alert
+            if (window.confirm(`Tem certeza que deseja remover o veículo ${v.modelo} (${v.placa}) da frota?`)) {
+                fleetData = fleetData.filter(item => item.id !== id);
+                saveToLocalStorage();
                 renderData();
             }
         }
 
-        function openDetail(id) {
-            const v = vehicles.find(item => item.id === id);
+        // Detail Ficha Modal
+        let currentDetailPhotos = [];
+        let currentDetailIdx = 0;
+
+        function openDetailModal(id) {
+            const v = fleetData.find(item => item.id === id);
             if (!v) return;
 
             document.getElementById('detailBadgePlaca').innerText = v.placa;
-            document.getElementById('detailTitle').innerText = `${v.marca} ${v.modelo} (${v.ano})`;
-            document.getElementById('detailSubtitle').innerText = `Técnico: ${v.tecnico || 'Não atribuído'}`;
-            document.getElementById('detailEstado').innerText = v.estado;
-            document.getElementById('detailKm').innerText = `${Number(v.km).toLocaleString()} km`;
-            document.getElementById('detailAnoCombustivel').innerText = `${v.ano} • ${v.combustivel}`;
-            document.getElementById('detailStatus').innerText = v.status;
-            document.getElementById('detailObs').innerText = v.obs || 'Nenhuma observação informada.';
-            document.getElementById('detailEditBtn').onclick = () => { closeDetailModal(); openModal('edit', v.id); };
+            document.getElementById('detailTitle').innerText = `${v.marca} ${v.modelo}`;
+            document.getElementById('detailSubtitle').innerText = `Responsável: ${v.tecnico || 'Não atribuído'}`;
+            document.getElementById('detailEstado').innerHTML = getStateBadge(v.estado);
+            document.getElementById('detailKm').innerText = Number(v.km).toLocaleString('pt-BR') + ' KM';
+            document.getElementById('detailAnoCombustivel').innerText = `${v.ano} • ${v.combustivel || 'Flex'}`;
+            document.getElementById('detailStatus').innerHTML = getStatusBadge(v.status);
+            document.getElementById('detailObs').innerText = v.obs || 'Nenhuma observação cadastrada para este veículo.';
 
-            currentDetailPhotos = (v.fotos && v.fotos.length > 0) ? v.fotos : ['https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80'];
-            activeDetailPhotoIdx = 0;
-            renderDetailPhotos();
+            currentDetailPhotos = v.photos && v.photos.length > 0 ? v.photos : ['https://placehold.co/600x400/18181b/dc2626?text=Sem+Foto'];
+            currentDetailIdx = 0;
+
+            updateDetailImage();
+
+            // Render Thumbnails
+            const thumbsContainer = document.getElementById('detailThumbnails');
+            thumbsContainer.innerHTML = '';
+            currentDetailPhotos.forEach((src, idx) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = `w-14 h-14 rounded-lg object-cover cursor-pointer border-2 transition ${idx === 0 ? 'border-brand-500 scale-105' : 'border-transparent opacity-60 hover:opacity-100'}`;
+                img.onclick = () => {
+                    currentDetailIdx = idx;
+                    updateDetailImage();
+                    Array.from(thumbsContainer.children).forEach((child, i) => {
+                        child.className = `w-14 h-14 rounded-lg object-cover cursor-pointer border-2 transition ${i === idx ? 'border-brand-500 scale-105' : 'border-transparent opacity-60 hover:opacity-100'}`;
+                    });
+                };
+                thumbsContainer.appendChild(img);
+            });
+
+            document.getElementById('detailEditBtn').onclick = () => {
+                closeDetailModal();
+                editVehicle(v.id);
+            };
 
             document.getElementById('detailModal').classList.remove('hidden');
+        }
+
+        function updateDetailImage() {
+            document.getElementById('detailMainImage').src = currentDetailPhotos[currentDetailIdx];
+            document.getElementById('detailPhotoCounter').innerText = `Foto ${currentDetailIdx + 1} de ${currentDetailPhotos.length}`;
         }
 
         function closeDetailModal() {
             document.getElementById('detailModal').classList.add('hidden');
         }
 
-        function renderDetailPhotos() {
-            const mainImg = document.getElementById('detailMainImage');
-            const counter = document.getElementById('detailPhotoCounter');
-            const thumbs = document.getElementById('detailThumbnails');
+        // PDF Export Functionality
+        function exportToPDF() {
+            if (fleetData.length === 0) return;
 
-            mainImg.src = currentDetailPhotos[activeDetailPhotoIdx];
-            counter.innerText = `Foto ${activeDetailPhotoIdx + 1} de ${currentDetailPhotos.length}`;
-            thumbs.innerHTML = '';
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
 
-            currentDetailPhotos.forEach((src, idx) => {
-                const thumb = document.createElement('img');
-                thumb.src = src;
-                thumb.className = `w-14 h-14 rounded-lg object-cover cursor-pointer border transition ${idx === activeDetailPhotoIdx ? 'border-brand-500 scale-105' : 'border-dark-border opacity-60 hover:opacity-100'}`;
-                thumb.onclick = () => {
-                    activeDetailPhotoIdx = idx;
-                    renderDetailPhotos();
-                };
-                thumbs.appendChild(thumb);
+            // Title Header
+            doc.setFillColor(18, 18, 21);
+            doc.rect(0, 0, 297, 24, 'F');
+
+            doc.setFontSize(16);
+            doc.setTextColor(239, 68, 68); // Brand red
+            doc.text('REDFLEET', 14, 13);
+
+            doc.setFontSize(12);
+            doc.setTextColor(255, 255, 255);
+            doc.text(' - Relatório Técnico de Frota', 42, 13);
+
+            doc.setFontSize(8);
+            doc.setTextColor(161, 161, 170);
+            doc.text(`Gerado em: ${new Date().toLocaleDateString('pt-BR')} ${new Date().toLocaleTimeString('pt-BR')} | Total: ${fleetData.length} veículo(s)`, 14, 19);
+
+            // Table Data
+            const headers = [['Placa', 'Veículo / Modelo', 'Marca', 'Ano', 'Estado', 'Status', 'Quilometragem', 'Técnico / Equipe', 'Combustível', 'Observações']];
+            const data = fleetData.map(v => [
+                v.placa || '',
+                v.modelo || '',
+                v.marca || '',
+                v.ano || '',
+                v.estado || '',
+                v.status || '',
+                `${Number(v.km || 0).toLocaleString('pt-BR')} KM`,
+                v.tecnico || 'Não atribuído',
+                v.combustivel || 'Flex',
+                v.obs || '-'
+            ]);
+
+            doc.autoTable({
+                head: headers,
+                body: data,
+                startY: 28,
+                theme: 'grid',
+                headStyles: {
+                    fillColor: [185, 28, 28],
+                    textColor: [255, 255, 255],
+                    fontStyle: 'bold',
+                    fontSize: 8,
+                    halign: 'center'
+                },
+                bodyStyles: {
+                    fontSize: 8,
+                    textColor: [30, 30, 30]
+                },
+                columnStyles: {
+                    0: { fontStyle: 'bold', halign: 'center' },
+                    3: { halign: 'center' },
+                    4: { halign: 'center' },
+                    5: { halign: 'center' },
+                    6: { halign: 'right' }
+                },
+                alternateRowStyles: {
+                    fillColor: [248, 248, 250]
+                },
+                margin: { top: 28, left: 10, right: 10 }
             });
+
+            doc.save(`relatorio_frota_redfleet_${new Date().toISOString().slice(0,10)}.pdf`);
         }
 
+        // CSV Import Functionality
         function importCSV(event) {
             const file = event.target.files[0];
             if (!file) return;
+
             const reader = new FileReader();
-            reader.onload = function(e) {
-                const lines = e.target.result.split('\n');
-                let count = 0;
-                lines.forEach((line, idx) => {
-                    if (idx === 0 || !line.trim()) return;
-                    const cols = line.split(',');
+            reader.onload = (e) => {
+                const text = e.target.result;
+                const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+                
+                if (lines.length <= 1) return;
+
+                const imported = [];
+                // Skip header line
+                for (let i = 1; i < lines.length; i++) {
+                    const cols = lines[i].split(';').map(c => c.replace(/^"|"$/g, ''));
                     if (cols.length >= 4) {
-                        vehicles.push({
-                            id: Date.now() + Math.random(),
-                            modelo: cols[1]?.trim() || 'Desconhecido',
-                            marca: cols[0]?.trim() || 'Geral',
-                            placa: cols[2]?.trim() || 'ABC-0000',
-                            ano: Number(cols[3]) || 2022,
-                            estado: 'Bom',
-                            status: 'Ativo',
-                            km: Number(cols[4]) || 10000,
-                            tecnico: cols[5]?.trim() || '',
-                            combustivel: 'Flex (Gas/Alc)',
-                            cor: 'Branco',
-                            obs: 'Importado via CSV',
-                            fotos: []
+                        imported.push({
+                            id: 'v-imp-' + Date.now() + '-' + i,
+                            modelo: cols[1] || 'Veículo Importado',
+                            marca: cols[2] || 'Generico',
+                            placa: cols[3] || 'AAA-0000',
+                            ano: Number(cols[4]) || 2022,
+                            estado: cols[5] || 'Bom',
+                            status: cols[6] || 'Ativo',
+                            km: Number(cols[7]) || 0,
+                            tecnico: cols[8] || '',
+                            combustivel: cols[9] || 'Flex',
+                            cor: cols[10] || '',
+                            obs: cols[11] || 'Importado via arquivo CSV',
+                            photos: ['https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80']
                         });
-                        count++;
                     }
-                });
-                persistVehicles();
-                renderData();
-                alert(`${count} veículos importados com sucesso!`);
+                }
+
+                if (imported.length > 0) {
+                    fleetData = [...imported, ...fleetData];
+                    saveToLocalStorage();
+                    renderData();
+                }
             };
             reader.readAsText(file);
-        }
-
-        function exportToPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            doc.text("Relatorio Geral de Frota - RedFleet", 14, 15);
-            
-            const rows = vehicles.map(v => [v.placa, `${v.marca} ${v.modelo}`, v.ano, v.tecnico || '-', `${v.km} km`, v.estado]);
-            doc.autoTable({
-                head: [['Placa', 'Veiculo', 'Ano', 'Tecnico', 'KM', 'Estado']],
-                body: rows,
-                startY: 20,
-            });
-            doc.save("relatorio_frota.pdf");
         }
     </script>
 </body>
